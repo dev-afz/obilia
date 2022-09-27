@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class SideModal extends Component
+class offcanvas extends Component
 {
     public $id;
     public $title;
@@ -23,6 +23,6 @@ class SideModal extends Component
      */
     public function render()
     {
-        return view('components.side-modal');
+        return view('components.offcanvas');
     }
 }

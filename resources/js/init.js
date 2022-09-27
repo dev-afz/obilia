@@ -1,6 +1,3 @@
-
-
-
 "use strict";
 
 function setTheme(data) {
@@ -17,7 +14,6 @@ function toast(type, head, text) {
         showMethod: "slideDown",
         hideMethod: "slideUp",
         timeOut: 2000,
-        rtl: isRtl,
         progressBar: true,
     });
 }
@@ -39,13 +35,13 @@ function sendReport(error) {
         },
         success: function (response) {
             unblockUI();
-            snb('success', 'Success', 'Report has been sent.');
+            toast('success', 'Success', 'Report has been sent.');
             console.log(response);
         },
         error: function (response) {
             unblockUI();
             console.log(response);
-            snb('error', 'Error',
+            toast('error', 'Error',
                 'There was an error while sending report. please contact the development team.');
             // console.log(response);
         }
@@ -72,6 +68,59 @@ function unblockUI() {
     $.unblockUI();
 }
 
+const blockDiv = (div, message = null) => {
+    $(div).block({
+        message:
+            message ?? '<div class="d-flex justify-content-center align-items-center"><p class="mr-50 mb-0">Please wait...</p> <div class="spinner-grow spinner-grow-sm text-white" role="status"></div> </div>',
+        css: {
+            backgroundColor: 'transparent',
+            color: '#fff',
+            border: '0'
+        },
+        overlayCSS: {
+            opacity: 0.5
+        }
+    });
+}
+
+const unblockDiv = (div) => {
+    $(div).unblock();
+}
+
+
+// const validated = (form) => {
+//     $(form).validate({
+//         errorClass: "error",
+//         validClass: "success",
+//         errorElement: "span",
+//         ignore: ":hidden:not(.summernote, .checkbox),.note-editable.card-block",
+//         errorPlacement: function (error, element) {
+//             if (element.hasClass("select2-hidden-accessible")) {
+//                 error.insertAfter(element.next("span.select2"));
+//             } else if (element.hasClass("summernote")) {
+//                 error.insertAfter(element.siblings(".note-editor"));
+//             } else if (element.hasClass("touchspin")) {
+//                 error.insertAfter(element.siblings(".input-group-append"));
+//             } else if (element.hasClass("checkbox")) {
+//                 error.insertAfter(element.siblings("label"));
+//             } else {
+//                 error.insertAfter(element);
+//             }
+//         }
+//     });
+// }
+
+function validate(form) {
+    if (form[0].checkValidity() === false) {
+        event.preventDefault();
+        event.stopPropagation();
+        form.addClass('was-validated');
+        return false;
+    }
+    form.addClass('was-validated');
+    return true;
+}
+
 
 
 function rebound({
@@ -85,6 +134,8 @@ function rebound({
     errorCallback = null,
     loader = null,
     returnData = false,
+    block = null,
+    blockMessage = null,
 }) {
     if (selector === null && data === null) {
         toast('error', 'Error', 'Please set the selector or data');
@@ -111,7 +162,7 @@ function rebound({
     const btn = $(selector).find('button[type="submit"]');
     const btn_text = $(btn).text();
     $(btn).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
-    blockUI(loader);
+    (block !== null) ? blockDiv(block, blockMessage) : blockUI(blockMessage);
     $.ajaxSetup({
         headers: {
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
@@ -121,8 +172,8 @@ function rebound({
     $.ajax({
         type: method,
         url: route,
-        processData: (data.length > 0) ? true : false,
-        contentType: (data.length > 0) ? true : false,
+        processData: (data?.length > 0) ? true : false,
+        contentType: (data?.length > 0) ? true : false,
         data: data ?? formData,
         success: function (response) {
             $(btn).html(btn_text);
@@ -138,9 +189,9 @@ function rebound({
 
                 $(selector).closest('.modal').modal('hide');
             }
-            unblockUI();
+            (block !== null) ? unblockDiv(block) : unblockUI();
             if (method == "get" || method == "GET") { } else {
-                snb((response.type) ? response.type : 'success', response.header, response.message);
+                toast((response.type) ? response.type : 'success', response.header, response.message);
                 if ($.fn.DataTable && response.table !== undefined) {
                     $('#' + response.table).DataTable().ajax.reload();
                 }
@@ -159,21 +210,21 @@ function rebound({
             return true
         },
         error: function (xhr, status, error) {
-            unblockUI();
+            (block !== null) ? unblockDiv(block) : unblockUI();
             $(btn).html(btn_text);
             if (xhr.status == 422) {
                 $.each(xhr.responseJSON.errors, function (key, item) {
-                    snb('error', 'Error', item[0]);
+                    toast('error', 'Error', item[0]);
                     console.log(item);
                 });
             } else if (xhr.status == 500) {
-                snb('error', 'Error500', error);
-                // console.error(xhr.responseJSON.errors);
-                report(xhr.responseJSON);
+                toast('error', 'Error500', error);
+                console.error(xhr.responseJSON.errors);
+                // report(xhr.responseJSON);
             } else {
-                report(xhr.responseJSON);
-                snb('error', 'Error', error);
-                // console.error(xhr.responseJSON.errors);
+                // report(xhr.responseJSON);
+                toast('error', 'Error', error);
+                console.error(xhr.responseJSON.errors);
             }
 
 
@@ -185,3 +236,23 @@ function rebound({
         }
     });
 }
+
+(() => {
+    $(document).on('click', '[data-view-image]', function () {
+        console.log('click');
+        try {
+            Swal.fire({
+                html: '<img class="s-image" src="' + $(this).attr('src') + '"  alt="image"/>',
+                showCloseButton: true,
+                showCancelButton: false,
+                showConfirmButton: false,
+                width: '800px',
+            });
+        } catch (error) {
+            console.log(error);
+            toast('warning', 'Warning', 'Import Swal library');
+        }
+
+    });
+})();
+

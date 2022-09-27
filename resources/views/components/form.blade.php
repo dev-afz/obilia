@@ -28,7 +28,7 @@ if ($reload) {
                     .closest('.form-group').find('.invalid-tooltip').text(), valid = false);
             })
             if (!valid) return false;
-            reboundForm({
+            rebound({
                 selector: this,
                 route: "{{ $route }}",
                 method: "POST",

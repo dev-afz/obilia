@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Metadata\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,6 +28,20 @@ Route::middleware(['web', 'admin.guest'])
     });
 
 
-Route::middleware(['web', 'admin.auth'])->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-});
+Route::middleware(['web', 'admin.auth'])
+    ->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+        Route::prefix('metadata')
+            ->name('metadata.')
+            ->group(function () {
+
+                Route::prefix('categories')
+                    ->name('categories.')
+                    ->controller(CategoryController::class)
+                    ->group(function () {
+                        Route::get('/', 'index')->name('index');
+                        Route::post('/', 'store')->name('store');
+                    });
+            });
+    });

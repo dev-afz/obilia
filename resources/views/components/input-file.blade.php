@@ -6,9 +6,7 @@
         <input type="file"
             @if ($multiple) multiple name="{{ $name }}[]" @else name="{{ $name }}" @endif
             @if ($required) required @endif {!! $attrs !!}
-            class="custom-file-input {{ $class }}" id="{{ $id ?? $name }}">
-        <label class="custom-file-label" for="{{ $id ?? $name }}">Choose
-            {{ Str::ucfirst(Str::replace('_', ' ', $name)) }}</label>
+            class="form-control {{ $class }}" id="{{ $id ?? $name }}">
         <div class="invalid-tooltip">Please provide a valid {{ Str::ucfirst(Str::replace('_', ' ', $name)) }}</div>
     </div>
 
