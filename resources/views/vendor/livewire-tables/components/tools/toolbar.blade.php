@@ -364,10 +364,10 @@ $theme = $component->getTheme();
                                 @foreach ($component->getFilters() as $filter)
                                     @if ($filter->isVisibleInMenus())
                                         <div wire:key="{{ $component->getTableName() }}-filter-{{ $filter->getKey() }}"
-                                            class="p-2">
+                                            class="p-1">
                                             <label
                                                 for="{{ $component->getTableName() }}-filter-{{ $filter->getKey() }}"
-                                                class="mb-2">
+                                                class="mb-1">
                                                 {{ $filter->getName() }}
                                             </label>
 
@@ -583,10 +583,10 @@ $theme = $component->getTheme();
                                 @foreach ($component->getFilters() as $filter)
                                     @if ($filter->isVisibleInMenus())
                                         <div wire:key="{{ $component->getTableName() }}-filter-{{ $filter->getKey() }}"
-                                            class="p-2">
+                                            class="p-1">
                                             <label
                                                 for="{{ $component->getTableName() }}-filter-{{ $filter->getKey() }}"
-                                                class="mb-2">
+                                                class="mb-1">
                                                 {{ $filter->getName() }}
                                             </label>
 

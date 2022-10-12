@@ -21,7 +21,7 @@
                         <a href="search.html"><i class="ti-hummer"></i></a>
                     </div>
                     <div class="sc-2-detail">
-                        <h5 class="sc-jb-title"><a href="search.html">Construction / Facilities</a></h5>
+                        <h5 class="sc-jb-title"><a href="search.html">Brand Identity Design</a></h5>
                         <span>6 new job</span>
                     </div>
 
@@ -36,7 +36,7 @@
                         <a href="search.html"><i class="ti-money"></i></a>
                     </div>
                     <div class="sc-2-detail">
-                        <h5 class="sc-jb-title"><a href="search.html">Account / Finance</a></h5>
+                        <h5 class="sc-jb-title"><a href="search.html">Drawing and Illustration</a></h5>
                         <span>10 new job</span>
                     </div>
 
@@ -51,7 +51,7 @@
                         <a href="search.html"><i class="ti-headphone"></i></a>
                     </div>
                     <div class="sc-2-detail">
-                        <h5 class="sc-jb-title"><a href="search.html">Telecommunications</a></h5>
+                        <h5 class="sc-jb-title"><a href="search.html">Digital Design</a></h5>
                         <span>12 new job</span>
                     </div>
 
@@ -66,7 +66,7 @@
                         <a href="search.html"><i class="ti-heart-broken"></i></a>
                     </div>
                     <div class="sc-2-detail">
-                        <h5 class="sc-jb-title"><a href="search.html">Healthcare</a></h5>
+                        <h5 class="sc-jb-title"><a href="search.html">Infographics & Presentation Design</a></h5>
                         <span>6 new job</span>
                     </div>
 
@@ -81,7 +81,7 @@
                         <a href="search.html"><i class="ti-desktop"></i></a>
                     </div>
                     <div class="sc-2-detail">
-                        <h5 class="sc-jb-title"><a href="search.html">Designing &amp; Multimedia</a></h5>
+                        <h5 class="sc-jb-title"><a href="search.html">Merchandise and Packaging</a></h5>
                         <span>08 new job</span>
                     </div>
 
@@ -96,7 +96,7 @@
                         <a href="search.html"><i class="ti-brush-alt"></i></a>
                     </div>
                     <div class="sc-2-detail">
-                        <h5 class="sc-jb-title"><a href="search.html">Education Training</a></h5>
+                        <h5 class="sc-jb-title"><a href="search.html">3D Modelling</a></h5>
                         <span>6 new job</span>
                     </div>
 
@@ -111,7 +111,7 @@
                         <a href="search.html"><i class="ti-car"></i></a>
                     </div>
                     <div class="sc-2-detail">
-                        <h5 class="sc-jb-title"><a href="search.html">Automotive Jobs</a></h5>
+                        <h5 class="sc-jb-title"><a href="search.html">Architecture and Interior Design</a></h5>
                         <span>07 new job</span>
                     </div>
 
@@ -126,7 +126,7 @@
                         <a href="search.html"><i class="ti-bar-chart-alt"></i></a>
                     </div>
                     <div class="sc-2-detail">
-                        <h5 class="sc-jb-title"><a href="search.html">Banking Jobs</a></h5>
+                        <h5 class="sc-jb-title"><a href="search.html">Photoshop Services</a></h5>
                         <span>12 new job</span>
                     </div>
 
@@ -138,7 +138,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="mt-3 text-center">
-                    <a href="#" class="_browse_more-2 light">Browse More Categories</a>
+                    <a href="#" class="_browse_more-2 light">Other Design</a>
                 </div>
             </div>
         </div>

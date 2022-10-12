@@ -1,8 +1,11 @@
-<x-livewire-tables::wrapper :component="$this">
+<x-livewire-tables::wrapper class="custom-dt" :component="$this">
     <x-livewire-tables::tools>
         <x-livewire-tables::tools.sorting-pills />
         <x-livewire-tables::tools.filter-pills />
         <x-livewire-tables::tools.toolbar />
+
+        <button hidden wire:click.prevent="refresh" data-table-refresh wire:key="bulk-action-refresh-table">
+            refresh</button>
     </x-livewire-tables::tools>
 
     <x-livewire-tables::table>
@@ -11,16 +14,16 @@
             <x-livewire-tables::table.th.bulk-actions />
             <x-livewire-tables::table.th.row-contents />
 
-            @foreach($columns as $index => $column)
+            @foreach ($columns as $index => $column)
                 @continue($column->isHidden())
-                @continue($this->columnSelectIsEnabled() && ! $this->columnSelectIsEnabledForColumn($column))
+                @continue($this->columnSelectIsEnabled() && !$this->columnSelectIsEnabledForColumn($column))
                 @continue($this->currentlyReorderingIsDisabled() && $column->isReorderColumn() && $this->hideReorderColumnUnlessReorderingIsEnabled())
 
                 <x-livewire-tables::table.th :column="$column" :index="$index" />
             @endforeach
         </x-slot>
 
-        @if($this->secondaryHeaderIsEnabled() && $this->hasColumnsWithSecondaryHeader())
+        @if ($this->secondaryHeaderIsEnabled() && $this->hasColumnsWithSecondaryHeader())
             <x-livewire-tables::table.tr.secondary-header :rows="$rows" />
         @endif
 
@@ -32,9 +35,9 @@
                 <x-livewire-tables::table.td.bulk-actions :row="$row" />
                 <x-livewire-tables::table.td.row-contents :rowIndex="$rowIndex" />
 
-                @foreach($columns as $colIndex => $column)
+                @foreach ($columns as $colIndex => $column)
                     @continue($column->isHidden())
-                    @continue($this->columnSelectIsEnabled() && ! $this->columnSelectIsEnabledForColumn($column))
+                    @continue($this->columnSelectIsEnabled() && !$this->columnSelectIsEnabledForColumn($column))
                     @continue($this->currentlyReorderingIsDisabled() && $column->isReorderColumn() && $this->hideReorderColumnUnlessReorderingIsEnabled())
 
                     <x-livewire-tables::table.td :column="$column" :colIndex="$colIndex">

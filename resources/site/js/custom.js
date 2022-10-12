@@ -163,17 +163,19 @@
                 delay: 20,
                 time: 800
             });
-        } else {
-            console.log('counterUp function is not defined');
+        }
+
+        if (typeof $.fn.metisMenu === 'function') {
+            $("#metismenu").metisMenu();
+            $('.metismenu').find('li.active').parents('li').find('a').click();
         }
     });
 
 
-    // Tooltip
-    $('[data-toggle="tooltip"]').tooltip()
+
 
     // Metis Menu
-    $("#metismenu").metisMenu();
+
 
     $(window).scroll(function () {
         var scroll = $(window).scrollTop();
@@ -185,188 +187,6 @@
         }
     });
 
-    // Employers
-    $("#brands").owlCarousel({
-        loop: true,
-        autoplay: true,
-        nav: false,
-        dots: false,
-        margin: 0,
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 2,
-                nav: false
-            },
-            600: {
-                items: 3,
-                nav: false
-            },
-            1000: {
-                items: 5,
-                nav: false,
-                loop: false
-            }
-        }
-    })
-
-    // Featured Slide
-    $('#theme-slide').owlCarousel({
-        loop: true,
-        margin: 0,
-        nav: false,
-        dots: true,
-        navText: ['<i class="fa fa-arrow-left"></i>', '<i class="fa fa-arrow-right"></i>'],
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 1,
-                autoplay: true
-            },
-            600: {
-                items: 2,
-                autoplay: true
-            },
-            1000: {
-                items: 3,
-                autoplay: true
-            },
-            1280: {
-                items: 3,
-                autoplay: true
-            }
-        }
-    })
-
-    $('#reviews-slide').owlCarousel({
-        loop: true,
-        margin: 18,
-        dots: true,
-        autoplay: false,
-        autoplayTimeout: 3000,
-        nav: false,
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 1
-            },
-
-            768: {
-                items: 2
-            },
-
-            992: {
-                items: 2
-            },
-            993: {
-                items: 3
-            }
-        }
-    });
-
-    $('#freelancer-slide').owlCarousel({
-        loop: true,
-        margin: 0,
-        dots: false,
-        animateOut: 'fadeOut',
-        animateIn: 'fadeIn',
-        smartSpeed: 450,
-        autoplay: true,
-        autoplayTimeout: 3000,
-        nav: false,
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 1
-            },
-
-            768: {
-                items: 1
-            },
-
-            992: {
-                items: 1
-            },
-            993: {
-                items: 1
-            }
-        }
-    });
-
-    // Featured Slide
-    $('#theme-slide-2').owlCarousel({
-        loop: true,
-        margin: 0,
-        nav: false,
-        dots: true,
-        navText: ['<i class="fa fa-arrow-left"></i>', '<i class="fa fa-arrow-right"></i>'],
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 1,
-                autoplay: true
-            },
-            600: {
-                items: 1,
-                autoplay: true
-            },
-            1000: {
-                items: 2,
-                autoplay: true
-            },
-            1280: {
-                items: 2,
-                autoplay: true
-            }
-        }
-    })
-
-    // Specialisms
-    $("#specialisms").select2({
-        placeholder: "Specialisms"
-    });
-
-    // All Select Country
-    $('#country').select2({
-        placeholder: "Select Country",
-        allowClear: true
-    });
-
-    // Job Type
-    $('#jb-type').select2({
-        placeholder: "Select Job Type",
-        allowClear: true
-    });
-
-    // Job Category
-    $('#jb-category').select2({
-        placeholder: "Select Category",
-        allowClear: true
-    });
-
-    // Career Level
-    $('#career').select2({
-        placeholder: "Career Level",
-        allowClear: true
-    });
-
-    // All Select Category
-    $('#category').select2({
-        placeholder: "Select An Option",
-        allowClear: true
-    });
-
-    // All Select Category
-    $('#jbtype').select2({
-        placeholder: "Job Types",
-        allowClear: true
-    });
 
     /****----- Counter ---------*/
     $('.count').on('each', function () {

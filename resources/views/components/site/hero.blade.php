@@ -3,10 +3,10 @@
         <div class="row align-items-center">
 
             <div class="col-lg-7 col-md-8">
-                <a href="#" class="header-promo w-inline-block">
+                {{-- <a href="#" class="header-promo w-inline-block">
                     <div class="label">NEW</div>
                     <div class="header-promo-text">Klioeo is now UK-Wide</div>
-                </a>
+                </a> --}}
                 <h1>Hire Experts Freelancers in Your City!</h1>
                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                     incididunt ut labore.</p>

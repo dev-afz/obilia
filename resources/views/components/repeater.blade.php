@@ -1,8 +1,8 @@
-<div class="col-12" id="container-{{ $name }}">
+<div class="col-12 " id="container-{{ $name }}">
     <div class="row">
 
         <div class="col-12">
-            <div class="row container-item-{{ $name }}">
+            <div class="row  mt-1 container-item-{{ $name }}">
                 @forelse ($fields as $f)
                     @if (empty($f['type']))
                         @php
@@ -67,7 +67,7 @@
             maxLimit: {{ $maxLimit }},
             minLimit: 1,
             defaultRender: 1,
-            afterRender: function() {
+            afterRender: function(e) {
                 if (feather) {
                     feather.replace({
                         width: 14,

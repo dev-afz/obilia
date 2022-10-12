@@ -21,6 +21,7 @@ class CategoryTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setPaginationStatus(true);
+        $this->setSearchDebounce(500);
     }
 
     public function columns(): array
@@ -38,8 +39,12 @@ class CategoryTable extends DataTableComponent
                 })
                 ->html(),
             Column::make("Status", "status")
-                ->searchable()
-                ->sortable(),
+                ->format(function ($value, $column, $row) {
+                    ($value === 'active') ? $status = 'success' : $status = 'danger';
+                    return '<span class="badge text-capitalize badge-light-' . $status . '">' . $value . '</span>';
+                })
+                ->sortable()
+                ->html(),
 
 
             Column::make("Created at", "created_at")
@@ -59,6 +64,15 @@ class CategoryTable extends DataTableComponent
             DateFilter::make('Created At', 'created_at')
                 ->filter(function ($query, $value) {
                     $query->whereDate('created_at', $value);
+                }),
+
+            SelectFilter::make('Status', 'status')
+                ->options([
+                    'active' => 'Active',
+                    'inactive' => 'Inactive',
+                ])
+                ->filter(function ($query, $value) {
+                    $query->where('status', $value);
                 }),
         ];
     }
@@ -83,6 +97,5 @@ class CategoryTable extends DataTableComponent
 
     public function refresh(): void
     {
-        Log::info('refresh');
     }
 }

@@ -10,4 +10,36 @@ class Category extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    |
+    | Relationships between models
+    |
+    */
+    public function sub_categories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
+
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    |
+    | Scopes for queries
+    |
+    */
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
 }

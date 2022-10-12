@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group mt-1">
     <label for="{{ $name }}">
         @if ($label)
             {{ $label }}
@@ -16,11 +16,11 @@
             name="{{ $name }}" @endif>
 
 
-        @forelse ($options as $option)
+        @forelse ($options as $key => $option)
             <option
                 @if (!empty($optionValue)) value="{{ $option->$optionValue }}"
             @else
-            value="{{ $option->id ?? $option }}" @endif>
+            value="{{ $option->id ?? $key }}" @endif>
                 {{ Str::ucfirst($option->name ?? ($option->title ?? $option)) }}
                 @forelse ($additionalOptionText as $add)
                     {{ Str::ucfirst($option->$add ?? $add) }}
@@ -35,13 +35,15 @@
     <div class="invalid-tooltip">Please provide a valid {{ Str::ucfirst(Str::replace('_', ' ', $name)) }}</div>
 </div>
 
-@pushonce('component-script')
+@push('component-script')
     <script>
         $(document).ready(function() {
-            $('.select2').select2({
+            $('#{{ $id ?? $name }}').select2({
                 allowClear: true,
-                placeholder: "Select an {{ Str::ucfirst(Str::replace('_', ' ', $name)) }}"
+                placeholder: "  {{ $placeholder ?? 'Select ' . Str::ucfirst(Str::replace('_', ' ', $name)) }}",
+                dropdownParent: $('#{{ $id ?? $name }}').parent(),
+                width: '100%'
             }).val('-1').trigger('change');
         });
     </script>
-@endpushonce
+@endpush

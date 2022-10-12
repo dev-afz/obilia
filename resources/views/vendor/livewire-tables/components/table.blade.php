@@ -44,7 +44,7 @@ $customAttributes = [
     <div
         {{ $attributes->merge($customAttributes['wrapper'])->class(['table-responsive' => $customAttributes['wrapper']['default'] ?? true])->except('default') }}>
         <table
-            {{ $attributes->merge($customAttributes['table'])->class([' table dataTable  table-striped' => $customAttributes['table']['default'] ?? true])->except('default') }}>
+            {{ $attributes->merge($customAttributes['table'])->class([' table dataTable   table-hover' => $customAttributes['table']['default'] ?? true])->except('default') }}>
             <thead
                 {{ $attributes->merge($customAttributes['thead'])->class(['' => $customAttributes['thead']['default'] ?? true])->except('default') }}>
                 <tr>

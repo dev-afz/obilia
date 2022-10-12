@@ -1,19 +1,19 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Metadata\CategoryController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Metadata\SubCategoryController;
+use App\Http\Controllers\Admin\GeneralController\PackageController;
 
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Admin Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Only admin can access these routes
 |
 */
 
@@ -28,20 +28,30 @@ Route::middleware(['web', 'admin.guest'])
     });
 
 
-Route::middleware(['web', 'admin.auth'])
-    ->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware(['web', 'admin.auth'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-        Route::prefix('metadata')
-            ->name('metadata.')
+    Route::prefix('metadata')->name('metadata.')->group(function () {
+
+        Route::prefix('categories')
+            ->name('categories.')
+            ->controller(CategoryController::class)
             ->group(function () {
-
-                Route::prefix('categories')
-                    ->name('categories.')
-                    ->controller(CategoryController::class)
-                    ->group(function () {
-                        Route::get('/', 'index')->name('index');
-                        Route::post('/', 'store')->name('store');
-                    });
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+            });
+        Route::prefix('sub-categories')
+            ->name('sub-categories.')
+            ->controller(SubCategoryController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
             });
     });
+
+    Route::prefix('packages')->name('packages.')->controller(PackageController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/add', 'add')->name('add');
+        Route::post('/store', 'store')->name('store');
+    });
+});

@@ -11,7 +11,7 @@ trait FileManager
 {
 
 
-    public static function uploadFile($file, string $path = "images", string $initials = "img"): string
+    public  function uploadFile($file, string $path = "images", string $initials = "img"): string
     {
         try {
             $destinationPath =  $path;

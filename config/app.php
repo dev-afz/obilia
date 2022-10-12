@@ -169,6 +169,9 @@ return [
          * Package Service Providers...
          */
 
+        Laravel\Socialite\SocialiteServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -195,6 +198,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Helper' => App\Helpers\Helpers::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ])->toArray(),
 
 ];

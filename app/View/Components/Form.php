@@ -14,8 +14,20 @@ class Form extends Component
     public $reset;
     public $reload;
     public $successCallback;
-    public function __construct($id, $route, $class = "", $method = "POST",  $btnText = "Submit", $reset = true, $reload = 0, $successCallback = "none")
-    {
+    public $errorCallback;
+    public $beforeSendCallback;
+    public function __construct(
+        string $id,
+        string $route,
+        string $class = "",
+        string $method = "POST",
+        string $btnText = "Submit",
+        bool $reset = true,
+        int $reload = 0,
+        string $successCallback = "none",
+        string $errorCallback = "none",
+        string $beforeSendCallback = "none"
+    ) {
         $this->id = $id;
         $this->class = $class;
         $this->method = $method;
@@ -24,6 +36,8 @@ class Form extends Component
         $this->reset = $reset;
         $this->reload = $reload;
         $this->successCallback = $successCallback;
+        $this->errorCallback = $errorCallback;
+        $this->beforeSendCallback = $beforeSendCallback;
     }
 
     /**

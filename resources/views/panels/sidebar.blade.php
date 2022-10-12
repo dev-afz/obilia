@@ -8,7 +8,7 @@ $configData = Helper::applClasses();
             <li class="nav-item me-auto">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <span class="brand-logo">
-                        <img src="{{ asset('images/logo/logo.png') }}" alt="">
+                        {{-- <img src="{{ asset('images/logo/logo.png') }}" alt=""> --}}
                     </span>
                     <h2 class="brand-text mb-0">{{ Str::ucfirst(env('APP_NAME')) }}</h2>
                 </a>
@@ -28,8 +28,8 @@ $configData = Helper::applClasses();
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             {{-- Foreach menu item starts --}}
-            @if (isset($menuData[0]))
-                @foreach ($menuData[0]->menu as $menu)
+            @if (isset($menuData['admin']))
+                @foreach ($menuData['admin']->menu as $menu)
                     @if (isset($menu->navheader))
                         <li class="navigation-header">
                             <span> {{ $menu->navheader }}</span>

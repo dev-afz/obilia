@@ -5,8 +5,10 @@
 
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-widget">
-                        <img src="site/img/logo.png" class="img-fluid f-logo" width="120" alt="">
-                        <p>407-472 Rue Saint-Sulpice, Montreal<br>Quebec, H2Y 2V8</p>
+                        <img {{-- src="site/img/logo.png"  --}} src="site/img/c-1.png" class="img-fluid f-logo" width="120"
+                            alt="">
+                        <p>405 Primus Business Park,<br> Rd Number 29, Ambika Nagar No. 2, Wagle Industrial Estate,<br>
+                            Thane, Maharashtra 400604</p>
                         <ul class="footer-bottom-social">
                             <li><a href="#"><i class="ti-facebook"></i></a></li>
                             <li><a href="#"><i class="ti-twitter"></i></a></li>
@@ -71,7 +73,7 @@
             <div class="row align-items-center">
 
                 <div class="col-lg-12 col-md-12 text-center">
-                    <p class="mb-0">© 2021 Workoo. Designd By <a href="https://themezhub.com/">Themez Hub</a> All
+                    <p class="mb-0">© 2021 Workoo. Designd By <a href="https://appdid.com/">Appdid</a> All
                         Rights Reserved</p>
                 </div>
 

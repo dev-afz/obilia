@@ -37,6 +37,7 @@ class CategoryController extends Controller
         return response([
             'header' => 'Category Created',
             'message' => 'Category has been created successfully',
+            'refresh_table' => true,
         ]);
     }
 }

@@ -50,21 +50,16 @@ const rebound = ({
         data: data,
         processData: (data.length > 0) ? true : false,
         contentType: (data.length > 0) ? true : false,
-        beforeSend: () => {
-            if (block !== null) {
-                Notiflix.Block.hourglass(block);
-            } else {
-                Notiflix.Loading.hourglass();
-            }
+        beforeSend: function () {
+
+            (block !== null) ? Notiflix.Block.hourglass(block) : Notiflix.Loading.hourglass();
             if (beforeSendCallback !== null) {
-                beforeSendCallback.apply(this, arguments);
+                beforeSendCallback.apply(null, arguments);
             }
         },
-        success: (response) => {
+        success: function (response) {
             (logging) ? console.log(response) : null;
-            if (successCallback !== null) {
-                successCallback.apply(this, arguments);
-            }
+            (block !== null) ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
 
             if (reset) {
                 $(form).find('input').each(function () {
@@ -75,20 +70,23 @@ const rebound = ({
                 notify.success(response.header ?? 'Success!!', response.message ?? '');
             }
             (refresh || response.refresh) ? location.reload() : null;
-            if (redirect !== null || response.redirect !== null) {
+            if (redirect !== null || (response.redirect !== null && response.redirect !== undefined)) {
                 window.location.href = redirect ?? response.redirect;
             }
-
+            if (successCallback !== null) {
+                successCallback.apply(null, arguments);
+            }
 
             if (returnData) {
                 return response;
             }
             return true;
         },
-        error: (xhr, status, error) => {
+        error: function (xhr, status, error) {
             (logging) ? console.error(error) : null;
+            (block !== null) ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
             if (errorCallback !== null) {
-                errorCallback.apply(this, arguments);
+                errorCallback.apply(null, arguments);
             }
             if (xhr.status == 422) {
                 $.each(xhr.responseJSON.errors, function (key, item) {
@@ -109,7 +107,7 @@ const rebound = ({
                 Notiflix.Loading.remove();
             }
             if (completeCallback !== null) {
-                completeCallback.apply(this, arguments);
+                completeCallback.apply(null, arguments);
             }
         }
     });

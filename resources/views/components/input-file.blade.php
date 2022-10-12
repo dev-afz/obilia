@@ -1,4 +1,4 @@
-<div class="form-group {{ $parentClass }}">
+<div class="form-group {{ $parentClass }} mt-1">
     @if ($hasLabel)
         <label for="{{ $id ?? $name }}">{{ Str::ucfirst(Str::replace('_', ' ', $name)) }}</label>
     @endif

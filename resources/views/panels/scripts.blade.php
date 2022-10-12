@@ -4,6 +4,7 @@
 
 <script src="{{ asset(mix('vendors/js/extensions/toastr.min.js')) }}"></script>
 @yield('vendor-script')
+@stack('component-vendor-script')
 
 <script src="{{ asset(mix('js/core/app-menu.js')) }}"></script>
 <script src="{{ asset(mix('js/core/app.js')) }}"></script>

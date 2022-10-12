@@ -1,11 +1,13 @@
-@if (!empty($label))
-    <label for="{{ $id ?? $name }}">{{ $label }}</label>
-@endif
-<div id="{{ $id ?? $name }}">
-    <div class="editor">
-        {{ $slot }}
+<div class="mt-1">
+    @if (!empty($label))
+        <label for="{{ $id ?? $name }}">{{ $label }}</label>
+    @endif
+    <div id="{{ $id ?? $name }}">
+        <div class="editor">
+            {{ $slot }}
+        </div>
+        <input data-{{ $id ?? $name }} type="hidden" name="{{ $name }}">
     </div>
-    <input data-{{ $id ?? $name }} type="hidden" name="{{ $name }}">
 </div>
 @pushonce('component-style')
     <link rel="stylesheet" href="{{ asset(mix('vendors/css/editors/quill/katex.min.css')) }}">

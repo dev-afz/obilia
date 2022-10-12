@@ -80,7 +80,7 @@ mix
     .sass('resources/scss/base/custom-rtl.scss', 'public/css-rtl', { sassOptions })
     .sass('resources/assets/scss/style-rtl.scss', 'public/css-rtl', { sassOptions })
     .sass('resources/assets/scss/style.scss', 'public/css', { sassOptions })
-    .sass('resources/site/scss/override.sass', 'public/site/css', { sassOptions })
+    .sass('resources/site/scss/override.scss', 'public/site/css', { sassOptions })
     .copy('resources/site/custom/init.js', 'public/site/js', { sassOptions })
     .copy('resources/js/init.js', 'public/js/init.js')
 

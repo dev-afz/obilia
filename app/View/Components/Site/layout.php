@@ -7,14 +7,14 @@ use Illuminate\View\Component;
 class layout extends Component
 {
     public $title;
-    public $scripts;
+    public $include;
     public function __construct(
         string $title = 'No title',
-        array $scripts = []
+        array $include = []
 
     ) {
         $this->title = $title . ' - ' . config('app.name');
-        $this->scripts = $scripts;
+        $this->include = $include;
     }
 
     /**

@@ -8,7 +8,7 @@
 
     </label>
 
-    <select @if ($required) required @endif class="select2  form-control {{ $class }}"
+    <select @if ($required) required @endif class="select2 rep-select form-control {{ $class }}"
         {!! $attrs !!}
         @if ($multiple) multiple
             name="{{ $repeaterName }}[][{{ $name }}][]"
@@ -18,11 +18,11 @@
             <option selected disabled>Select {{ Str::ucfirst(Str::replace('_', ' ', $name)) }}</option>
         @endif
 
-        @forelse ($options as $option)
+        @forelse ($options as $key => $option)
             <option
                 @if (!empty($optionValue)) value="{{ $option->$optionValue }}"
             @else
-            value="{{ $option->id ?? $option }}" @endif>
+            value="{{ $option->id ?? $key }}" @endif>
                 {{ $option->name ?? ($option->title ?? $option) }}
                 @forelse ($additionalOptionText as $add)
                     {{ $option->$add ?? $add }}
@@ -40,9 +40,11 @@
 @pushonce('component-script')
     <script>
         $(document).ready(function() {
-            $('.select2').select2({
+            $('.rep-select').select2({
                 allowClear: true,
-                placeholder: "Select an {{ Str::ucfirst(Str::replace('_', ' ', $name)) }}"
+                placeholder: "Select an {{ Str::ucfirst(Str::replace('_', ' ', $name)) }}",
+                dropdownParent: $('#container-{{ $repeaterName }}'),
+                width: '100%'
             }).val('-1').trigger('change');
         });
     </script>

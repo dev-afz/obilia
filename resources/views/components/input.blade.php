@@ -1,4 +1,4 @@
-<div class="form-group {{ $parentClass }} text-left">
+<div class="form-group {{ $parentClass }} text-left mt-1">
     @if (($hasLabel || !empty($label)) && $type !== 'hidden')
         <label for="{{ $id ?? $name }}">{!! Str::ucfirst(Str::replace('_', ' ', $label ?? $name)) !!}</label>
     @endif

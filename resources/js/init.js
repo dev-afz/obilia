@@ -130,8 +130,10 @@ function rebound({
     route = null,
     reset = true,
     reload = false,
+    redirect = null,
     successCallback = null,
     errorCallback = null,
+    beforeSendCallback = null,
     loader = null,
     returnData = false,
     block = null,
@@ -175,8 +177,24 @@ function rebound({
         processData: (data?.length > 0) ? true : false,
         contentType: (data?.length > 0) ? true : false,
         data: data ?? formData,
+
+        beforeSend: function () {
+            if (beforeSendCallback !== null) {
+                beforeSendCallback();
+            }
+        },
         success: function (response) {
             $(btn).html(btn_text);
+            if (response.refresh_table) {
+                $('[data-table-refresh]').trigger('click');
+            }
+
+            if (response.close_canvas) {
+                eval(response.close_canvas).hide();
+
+            }
+
+
             console.log(response);
             if (selector !== null) {
                 $(selector).removeClass('was-validated');
@@ -200,6 +218,13 @@ function rebound({
             if (reload || response.reload) {
                 location.reload();
             }
+
+
+            if (redirect !== null || (response.redirect !== undefined && response.redirect !== null)) {
+                window.location.href = redirect ?? response.redirect;
+            }
+
+
             if (successCallback !== null) {
                 successCallback.apply(null, arguments);
             }

@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <div class="owl-carousel owl-theme middle-arrow-hover" id="theme-slide">
+                <div class="owl-carousel owl-theme middle-arrow-hover" id="testemonial-slide">
 
                     <!-- Single Review -->
                     <div class="item">
@@ -101,3 +101,34 @@
 
     </div>
 </section>
+
+@push('component-scripts')
+    <script>
+        $('#testemonial-slide').owlCarousel({
+            loop: true,
+            margin: 0,
+            nav: false,
+            dots: true,
+            navText: ['<i class="fa fa-arrow-left"></i>', '<i class="fa fa-arrow-right"></i>'],
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    autoplay: true
+                },
+                600: {
+                    items: 2,
+                    autoplay: true
+                },
+                1000: {
+                    items: 3,
+                    autoplay: true
+                },
+                1280: {
+                    items: 3,
+                    autoplay: true
+                }
+            }
+        })
+    </script>
+@endpush

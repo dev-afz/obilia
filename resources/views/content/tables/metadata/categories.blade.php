@@ -1,6 +1,6 @@
 @extends('layouts/contentLayoutMaster')
 
-@section('title', 'Home')
+@section('title', 'Categories')
 
 
 @section('page-style')
@@ -28,7 +28,7 @@
     </section>
 
     <x-offcanvas id="addCategoryCanvas" title="Add Category">
-        <x-form id="add-category" :route="route('admin.metadata.categories.store')">
+        <x-form class="g-1" id="add-category" :route="route('admin.metadata.categories.store')">
 
             <div class="col-12">
                 <x-input name="name" />

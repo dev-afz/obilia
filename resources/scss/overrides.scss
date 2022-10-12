@@ -24,6 +24,11 @@
   .table-hover > tbody > tr:hover > * {
     --bs-table-accent-bg: #161d31;
   }
+  .select2-container--default
+    .select2-selection--single
+    .select2-selection__rendered {
+    color: #b4b7bd;
+  }
 
   .table-striped > tbody > tr:nth-of-type(2n + 1) > * {
     --bs-table-accent-bg: #161d31 !important;
@@ -56,6 +61,33 @@
   }
   th {
     color: #b4b7bd !important;
+  }
+
+  .custom-dt {
+    select {
+      background: #161d31;
+      border: 1px solid #39425b;
+    }
+    .btn.dropdown-toggle {
+      background: #161d31;
+    }
+    .btn.dropdown-toggle:after {
+      filter: none;
+    }
+  }
+}
+
+.custom-dt {
+  .btn.dropdown-toggle {
+    background-color: #f3f2f7;
+  }
+
+  .btn.dropdown-toggle::after {
+    filter: sepia(100%) saturate(200%) brightness(20%) hue-rotate(330deg);
+  }
+
+  select {
+    background-color: #f3f2f7;
   }
 }
 .nav-link.dropdown-toggle {

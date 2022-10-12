@@ -1,5 +1,5 @@
-<form class="needs-validation form form-vertical {{ $class }}" id="{{ $id }}" novalidate="">
-    <div class="row gap-1">
+<form class="needs-validation form form-vertical" id="{{ $id }}" novalidate="">
+    <div class="row  {{ $class }}">
         {{ $slot }}
     </div>
     <div class="col-12 mt-3 text-center">
@@ -14,6 +14,13 @@ if ($reload) {
 } else {
     $rld = 0;
 }
+
+if ($reset) {
+    $rst = 1;
+} else {
+    $rst = 0;
+}
+
 @endphp
 @push('component-script')
     <script>
@@ -33,9 +40,11 @@ if ($reload) {
                 route: "{{ $route }}",
                 method: "POST",
                 loader: '<div class="create"><span class="loader"></span></div>',
-                reset: {{ $reset }},
+                reset: {{ $rst }},
                 relaod: {{ $rld }},
                 successCallback: {{ $successCallback }},
+                errorCallback: {{ $errorCallback }},
+                beforeSendCallback: {{ $beforeSendCallback }},
             })
         });
 
