@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin\GeneralController;
 
-use App\Http\Controllers\Controller;
+use App\Action\Admin\PackageAction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\Package;
 
 class PackageController extends Controller
 {
@@ -19,7 +22,7 @@ class PackageController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, PackageAction $action)
     {
 
 
@@ -29,7 +32,7 @@ class PackageController extends Controller
             'description' => 'nullable|string|max:255',
             'duration' => 'required|integer|min:30',
             'for' => 'required|string|in:individual,agency',
-            'package_type' => 'required|string|in:onetime,subscription',
+            'payment_type' => 'required|string|in:onetime,subscription',
             'price' => 'required|numeric|min:1',
             'discount' => 'nullable|numeric|min:0',
             'perks' => 'required|array',
@@ -37,6 +40,14 @@ class PackageController extends Controller
             'perks.*.value' => 'required',
 
         ]);
-        return $request->all();
+
+
+        $action->create($request);
+
+        return response()->json([
+            'message' => 'Package created successfully',
+            'status' => 'success',
+            'header' => 'Success',
+        ]);
     }
 }
