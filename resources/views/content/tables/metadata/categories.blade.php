@@ -8,6 +8,10 @@
         .dropdown-menu {
             transform: scale(1, 1) !important;
         }
+
+        h1 {
+            color: red !important;
+        }
     </style>
 @endsection
 
