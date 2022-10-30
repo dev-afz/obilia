@@ -1,6 +1,6 @@
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-        <div class="modal-content" id="registermodal">
+        <div class="modal-content" id="login-modal">
             <div class="modal-header">
                 <h4>Sign In</h4>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span
@@ -13,7 +13,7 @@
 
                         <div class="form-group mb-3">
                             <label>Email</label>
-                            <input type="text" name="email" class="form-control" placeholder="Username">
+                            <input type="text" name="email" class="form-control" placeholder="Email">
                         </div>
 
                         <div class="form-group mb-3">
@@ -43,8 +43,8 @@
 
             </div>
             <div class="modal-footer">
-                <div class="mf-link"><i class="ti-user"></i>Haven't An Account?<a href="javascript:void(0)"
-                        class="theme-cl"> Sign Up</a></div>
+                <div class="mf-link"><i class="ti-user"></i>Haven't An Account?<a href="#"data-bs-toggle="modal"
+                        data-bs-target="#signup" class="theme-cl"> Sign Up</a></div>
                 <div class="mf-forget"><a href="#"><i class="ti-help"></i>Forget Password</a></div>
             </div>
         </div>
@@ -63,6 +63,9 @@
                         $('#login').modal('hide');
                     }
                 });
+            });
+            $('#login').on('show.bs.modal', function() {
+                $('#signup').modal('hide');
             });
         });
     </script>

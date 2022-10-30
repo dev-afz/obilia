@@ -18,9 +18,6 @@ class SubCategoryController extends Controller
         return view('content.tables.metadata.sub-categories', compact('categories'));
     }
 
-
-
-
     public function store(Request $request)
     {
         $request->validate([

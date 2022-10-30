@@ -6,7 +6,8 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Metadata\CategoryController;
 use App\Http\Controllers\Admin\Metadata\SubCategoryController;
 use App\Http\Controllers\Admin\GeneralController\PackageController;
-
+use App\Http\Controllers\Admin\Metadata\ExperienceLevelController;
+use App\Http\Controllers\Admin\Metadata\SkillController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,20 @@ Route::middleware(['web', 'admin.auth'])->group(function () {
         Route::prefix('sub-categories')
             ->name('sub-categories.')
             ->controller(SubCategoryController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+            });
+        Route::prefix('experience-levels')
+            ->name('experience-levels.')
+            ->controller(ExperienceLevelController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+            });
+        Route::prefix('skills')
+            ->name('skills.')
+            ->controller(SkillController::class)
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');

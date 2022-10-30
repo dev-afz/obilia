@@ -5,6 +5,12 @@ Notiflix.Loading.init({
 Notiflix.Block.init({
     zindex: 9999999,
 });
+
+Notiflix.Notify.init({
+    zindex: 99999999,
+});
+
+
 const notify = Notiflix.Notify;
 
 const rebound = ({
@@ -80,18 +86,25 @@ const rebound = ({
             if (returnData) {
                 return response;
             }
+            $(form).find('.is-invalid').each(function () {
+                $(this).removeClass('is-invalid');
+            });
             return true;
         },
         error: function (xhr, status, error) {
-            (logging) ? console.error(error) : null;
+            // (logging) ? console.error(error) : null;
             (block !== null) ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
             if (errorCallback !== null) {
                 errorCallback.apply(null, arguments);
             }
             if (xhr.status == 422) {
+                $(form).find('.is-invalid').each(function () {
+                    $(this).removeClass('is-invalid');
+                });
                 $.each(xhr.responseJSON.errors, function (key, item) {
                     notify.failure(item[0]);
                     $(form).find(`[name=${key}]`).addClass('is-invalid');
+                    console.log(key);
                 });
             } else if (xhr.status == 500) {
                 notify.failure(error);

@@ -26,6 +26,6 @@ class OauthService
             return  $this->handleRedirect($user);
         }
 
-        throw new \Exception('User not found');
+        return redirect()->route('site.index')->with('error', 'User not found');
     }
 }

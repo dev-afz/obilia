@@ -12,6 +12,7 @@
     <x-site.footer />
     @guest
         <x-site.signin-modal />
+        <x-site.signup-modal />
     @endguest
 
     @section('page-scripts')
@@ -22,6 +23,12 @@
                     allowClear: true
                 });
             });
+            @if (session('error'))
+                $(document).ready(function() {
+                    notify.failure("{{ session('error') }}");
+                });
+            @endif
         </script>
     @endsection
+
 </x-site.layout>
