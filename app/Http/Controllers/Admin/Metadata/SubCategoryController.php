@@ -29,7 +29,7 @@ class SubCategoryController extends Controller
 
         SubCategory::create([
             'name' => $request->name,
-            'category_id' => $request->category_id,
+            'category_id' => $request->category,
             'image' => $this->uploadFile($request->image, 'images/sub-category', 'img'),
             'slug' => Str::slug($request->name),
         ]);

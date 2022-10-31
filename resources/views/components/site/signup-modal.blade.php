@@ -54,7 +54,7 @@
         </div>
     </div>
 </div>
-@push('component-scripts')
+@push('component-script')
     <script>
         $(document).ready(function() {
             $(document).on('submit', '#signup-form', async (e) => {

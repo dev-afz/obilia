@@ -8,7 +8,12 @@ Notiflix.Block.init({
 
 Notiflix.Notify.init({
     zindex: 99999999,
+    position: 'right-bottom',
+    cssAnimation: true,
+    cssAnimationDuration: 400,
+    cssAnimationStyle: 'zoom',
 });
+
 
 
 const notify = Notiflix.Notify;
@@ -20,13 +25,14 @@ const rebound = ({
     url = null,
     refresh = false,
     reset = true,
+    reload = false,
     redirect = null,
     block = null,
     beforeSendCallback = null,
     successCallback = null,
     errorCallback = null,
     completeCallback = null,
-    showNotify = true,
+    notification = true,
     logging = true,
     returnData = false,
 
@@ -72,7 +78,13 @@ const rebound = ({
                     $(this).val('').trigger('change');
                 });
             }
-            if (showNotify) {
+
+            if (reload) {
+                location.reload();
+            }
+
+
+            if (notification) {
                 notify.success(response.header ?? 'Success!!', response.message ?? '');
             }
             (refresh || response.refresh) ? location.reload() : null;
@@ -128,3 +140,28 @@ const rebound = ({
 
 
 }
+
+
+
+// remove is-invalid class from input if it is valid
+$(document).on('change', 'input,select,textarea', function () {
+    if ($(this).val()) {
+        if ($(this).is('input')) {
+            $(this).removeClass('is-invalid');
+        } else if ($(this).is('select')) {
+            $(this).closest('.form-group').find('.select2-selection').css('border',
+                '1px solid #ced4da');
+        } else if ($(this).is('textarea')) {
+            $(this).removeClass('is-invalid');
+        }
+    } else {
+        if ($(this).is('input')) {
+            $(this).addClass('is-invalid');
+        } else if ($(this).is('select')) {
+            $(this).closest('.form-group').find('.select2-selection').css('border',
+                '1px solid red');
+        } else if ($(this).is('textarea')) {
+            $(this).addClass('is-invalid');
+        }
+    }
+});

@@ -79,6 +79,7 @@ namespace App\Models{
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ExperienceLevel active()
  * @method static \Illuminate\Database\Eloquent\Builder|ExperienceLevel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ExperienceLevel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ExperienceLevel query()
@@ -96,11 +97,66 @@ namespace App\Models{
 /**
  * App\Models\Job
  *
+ * @property int $id
+ * @property string $title
+ * @property string $slug
+ * @property string $description
+ * @property string $payment_type
+ * @property float|null $work_hours
+ * @property string $size
+ * @property string $visibility
+ * @property string $country
+ * @property float $rate_from
+ * @property float $rate_to
+ * @property int|null $experience_level_id
+ * @property int|null $sub_category_id
+ * @property string|null $metadata
+ * @property int $project_length_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereExperienceLevelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereMetadata($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job wherePaymentType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereProjectLengthId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereRateFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereRateTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereSubCategoryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereVisibility($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereWorkHours($value)
  */
 	class Job extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\JobSkill
+ *
+ * @property int $id
+ * @property int $job_id
+ * @property int $skill_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereSkillId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereUpdatedAt($value)
+ */
+	class JobSkill extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -113,7 +169,7 @@ namespace App\Models{
  * @property string|null $description
  * @property int|null $duration
  * @property float $price
- * @property float $discount
+ * @property float|null $discount
  * @property string $is_popular
  * @property string $is_subscription
  * @property string $for
@@ -176,6 +232,7 @@ namespace App\Models{
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill active()
  * @method static \Illuminate\Database\Eloquent\Builder|Skill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Skill newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Skill query()
@@ -249,5 +306,28 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\WorkLength
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property string $status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength query()
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength whereUpdatedAt($value)
+ */
+	class WorkLength extends \Eloquent {}
 }
 

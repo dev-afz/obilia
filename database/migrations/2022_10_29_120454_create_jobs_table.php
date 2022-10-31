@@ -14,22 +14,6 @@ return new class extends Migration
     public function up()
     {
 
-        /*
-        id INT NN
-title VARCHAR NN
-slug VARCHAR NN
-description VARCHAR NN
-payment_type ENUM NN
-work_hours FLOAT
-project_length FLOAT NN
-size ENUM NN
-visibility ENUM NN
-country VARCHAR NN
-rate_from FLOAT NN
-rate_to FLOAT NN
-experience_levels_id INT NN
-sub_categories_id INT NN
-*/
 
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
@@ -38,7 +22,6 @@ sub_categories_id INT NN
             $table->text('description');
             $table->enum('payment_type', ['fixed', 'hourly']);
             $table->float('work_hours')->nullable();
-            $table->float('project_length')->comment('in months');
             $table->enum('size', ['small', 'medium', 'large']);
             $table->enum('visibility', ['public', 'private', 'hidden']);
             $table->string('country');

@@ -120,8 +120,11 @@ table.dataTable th {
   max-width: 80%;
 }
 
-.custom-dt{
-    .dropdown-menu {
-        transform: scale(1, 1) !important;
-    }
+.custom-dt {
+  .dropdown-menu {
+    transform: scale(1, 1) !important;
+  }
+}
+.offcanvas-body {
+  height: 100%;
 }

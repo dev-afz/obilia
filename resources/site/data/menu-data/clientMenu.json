@@ -16,6 +16,12 @@
                     "name": "Jobs",
                     "icon": null,
                     "slug": "site.client.jobs.index"
+                },
+                {
+                    "url": "client/jobs/create",
+                    "name": "Add Job",
+                    "icon": null,
+                    "slug": "site.client.jobs.create"
                 }
             ]
         }

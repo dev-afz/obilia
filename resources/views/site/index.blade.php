@@ -9,7 +9,7 @@
     <x-site.join-or-hire />
     <x-site.pricing />
     <x-site.testimonials />
-    <x-site.footer />
+
     @guest
         <x-site.signin-modal />
         <x-site.signup-modal />

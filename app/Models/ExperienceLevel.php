@@ -10,4 +10,35 @@ class ExperienceLevel extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    |
+    | Relationships between models
+    |
+    */
+
+
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    |
+    | Scopes for queries
+    |
+    */
+
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
 }

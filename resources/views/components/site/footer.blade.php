@@ -5,7 +5,7 @@
 
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-widget">
-                        <img {{-- src="site/img/logo.png"  --}} src="site/img/c-1.png" class="img-fluid f-logo" width="120"
+                        <img {{-- src="site/img/logo.png"  --}} src="/site/img/c-1.png" class="img-fluid f-logo" width="120"
                             alt="">
                         <p>405 Primus Business Park,<br> Rd Number 29, Ambika Nagar No. 2, Wagle Industrial Estate,<br>
                             Thane, Maharashtra 400604</p>

@@ -16,11 +16,14 @@ Route::name('site.')
             ->middleware(['auth.client', 'auth'])
             ->group(function () {
                 Route::get('/', 'dashboard')->name('dashboard');
+                Route::get('subcategories', 'subcategories')->name('subcategories');
                 Route::prefix('jobs')
                     ->name('jobs.')
                     ->controller(JobController::class)
                     ->group(function () {
                         Route::get('/', 'index')->name('index');
+                        Route::get('create', 'create')->name('create');
+                        Route::post('store', 'store')->name('store');
                     });
             });
     });

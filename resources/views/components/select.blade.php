@@ -15,6 +15,13 @@
         @else
             name="{{ $name }}" @endif>
 
+        @if (!$multiple)
+            <option selected disabled>Select option an @if ($label)
+                    {{ $label }}@else{{ Str::ucfirst(Str::replace('_', ' ', $name)) }}
+                @endif
+            </option>
+        @endif
+
 
         @forelse ($options as $key => $option)
             <option
@@ -36,14 +43,18 @@
 </div>
 
 @push('component-script')
-    <script>
-        $(document).ready(function() {
-            $('#{{ $id ?? $name }}').select2({
-                allowClear: true,
-                placeholder: "  {{ $placeholder ?? 'Select ' . Str::ucfirst(Str::replace('_', ' ', $name)) }}",
-                dropdownParent: $('#{{ $id ?? $name }}').parent(),
-                width: '100%'
-            }).val('-1').trigger('change');
-        });
-    </script>
+
+    @if (!$withoutScript)
+        <script>
+            $(document).ready(function() {
+                $('#{{ $id ?? $name }}').select2({
+                    allowClear: true,
+                    placeholder: "  {{ $placeholder ?? 'Select ' . Str::ucfirst(Str::replace('_', ' ', $name)) }}",
+                    dropdownParent: $('#{{ $id ?? $name }}').parent(),
+                    width: '100%',
+                    tags: {{ $tags }},
+                }).val('-1').trigger('change');
+            });
+        </script>
+    @endif
 @endpush

@@ -27,6 +27,7 @@
         {!! $slot !!}
 
     </div>
+    <x-site.footer />
     <x-site.scripts :include="$include" />
 </body>
 

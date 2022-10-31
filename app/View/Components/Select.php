@@ -9,6 +9,7 @@ class Select extends Component
     public $name;
     public $options;
     public $multiple;
+    public $tags;
     public $class;
     public $attrs;
     public $required;
@@ -18,10 +19,12 @@ class Select extends Component
     public $array;
     public $id;
     public $placeholder;
+    public $withoutScript;
     public function __construct(
         string $name,
         array|object $options = [],
         bool $multiple = false,
+        int $tags = 0,
         string $class = "",
         $attrs = "",
         bool $required = true,
@@ -30,11 +33,13 @@ class Select extends Component
         string $optionValue = null,
         bool $array = false,
         $id = null,
-        string $placeholder = null
+        string $placeholder = null,
+        bool $withoutScript = false
     ) {
         $this->name = $name;
         $this->options = $options;
         $this->multiple = $multiple;
+        $this->tags = $tags;
         $this->class = $class;
         $this->attrs = $attrs;
         $this->required = $required;
@@ -44,6 +49,7 @@ class Select extends Component
         $this->array = $array;
         $this->id = $id;
         $this->placeholder = $placeholder;
+        $this->withoutScript = $withoutScript;
     }
 
     /**

@@ -22,3 +22,33 @@ i.side-bar-icon svg {
   width: 20px;
   height: 20px;
 }
+
+.select2-selection {
+  border-radius: 0.25rem !important;
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+  border: 1px solid #e0ecf5 !important;
+}
+
+.with-light input,
+.with-light textarea {
+  background: #f1f4f9;
+}
+.with-light .form-control:focus {
+  background: #f1f4f9;
+}
+.with-light .form-control:focus ~ .input-group {
+  border: #e0ecf5;
+}
+
+.input-group {
+  position: unset !important;
+}
+
+.is-invalid ~ .invalid-feedback,
+.is-invalid ~ .invalid-tooltip,
+.was-validated :invalid ~ .invalid-feedback,
+.was-validated :invalid ~ .invalid-tooltip {
+  display: none !important;
+}
