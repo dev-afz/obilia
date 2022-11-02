@@ -27,7 +27,7 @@
             <option
                 @if (!empty($optionValue)) value="{{ $option->$optionValue }}"
             @else
-            value="{{ $option->id ?? $key }}" @endif>
+            value="{{ $option->id ?? $option }}" @endif>
                 {{ Str::ucfirst($option->name ?? ($option->title ?? $option)) }}
                 @forelse ($additionalOptionText as $add)
                     {{ Str::ucfirst($option->$add ?? $add) }}

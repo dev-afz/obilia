@@ -27,7 +27,7 @@ const rebound = ({
     reset = true,
     reload = false,
     redirect = null,
-    block = null,
+    block = 'body',
     beforeSendCallback = null,
     successCallback = null,
     errorCallback = null,
@@ -85,14 +85,14 @@ const rebound = ({
 
 
             if (notification) {
-                notify.success(response.header ?? 'Success!!', response.message ?? '');
+                notify.success(response.message ?? 'Success!!');
             }
             (refresh || response.refresh) ? location.reload() : null;
             if (redirect !== null || (response.redirect !== null && response.redirect !== undefined)) {
                 window.location.href = redirect ?? response.redirect;
             }
             if (successCallback !== null) {
-                successCallback.apply(null, arguments);
+                successCallback.apply(null, response);
             }
 
             if (returnData) {
@@ -107,7 +107,7 @@ const rebound = ({
             // (logging) ? console.error(error) : null;
             (block !== null) ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
             if (errorCallback !== null) {
-                errorCallback.apply(null, arguments);
+                errorCallback.apply(null, xhr);
             }
             if (xhr.status == 422) {
                 $(form).find('.is-invalid').each(function () {
@@ -125,14 +125,15 @@ const rebound = ({
             }
             return false;
         },
-        complete: () => {
+        complete: (response) => {
+            console.log("complete", response);
             if (block !== null) {
                 Notiflix.Block.remove(block);
             } else {
                 Notiflix.Loading.remove();
             }
             if (completeCallback !== null) {
-                completeCallback.apply(null, arguments);
+                completeCallback.apply(null, response);
             }
         }
     });
@@ -144,7 +145,7 @@ const rebound = ({
 
 
 // remove is-invalid class from input if it is valid
-$(document).on('change', 'input,select,textarea', function () {
+$(document).on('keyup change', 'form input,select,textarea', function () {
     if ($(this).val()) {
         if ($(this).is('input')) {
             $(this).removeClass('is-invalid');

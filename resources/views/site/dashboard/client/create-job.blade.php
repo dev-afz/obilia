@@ -14,33 +14,45 @@
                 </div>
 
                 <div class="_dashboard_content_body with-light">
-                    <x-site.form id="add-job-form" :route="route('site.client.jobs.store')">
+                    <x-site.form :reset="0" id="add-job-form" :route="route('site.client.jobs.store')">
 
                         <div class="mt-3 col-lg-12">
                             <x-input name="job_title" />
                         </div>
 
-                        <div class="mt-3 col-lg-4">
+                        <div class="mt-3 col-lg-6">
                             <x-select :withoutScript="true" name="industry" :options="$categories" />
                         </div>
 
-                        <div class="mt-3 col-lg-4">
+                        <div class="mt-3 col-lg-6">
                             <x-select :withoutScript="true" name="category" :options="[]" />
                         </div>
-                        <div class="mt-3 col-lg-4">
+                        <div class="mt-3 col-lg-6">
                             <x-select :withoutScript="true" name="experience" :options="$experience_levels" />
+                        </div>
+                        <div class="mt-3 col-lg-6">
+                            <x-select :withoutScript="true" name="project_length" :options="$length" />
+                        </div>
+                        <div class="mt-3 col-lg-6">
+                            <x-select :withoutScript="true" name="project_size" :options="['small', 'medium', 'large']" />
+                        </div>
+                        <div class="mt-3 col-lg-6">
+                            <x-input name="total_hours" type="number" attrs='step="0.01"' />
                         </div>
                         <div class="mt-3 col-lg-6">
                             <x-select :withoutScript="true" name="payment_type" :options="['fixed', 'hourly']" />
                         </div>
+
                         <div class="col-lg-6 mt-3">
                             <label>Budget</label>
                             <div class="form-row budget">
                                 <div class="col-xl-6 col-lg-6 col-md-6">
-                                    <x-input :hasLabel="false" name="from" prepend="₹" append="/hour(s)" />
+                                    <x-input :hasLabel="false" name="from" prepend="₹" type="number"
+                                        attrs='step="0.01"' append="/hour(s)" />
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6">
-                                    <x-input :hasLabel="false" name="to" prepend="₹" append="/hour(s)" />
+                                    <x-input :hasLabel="false" name="to" prepend="₹" type="number"
+                                        attrs='step="0.01"' append="/hour(s)" />
                                 </div>
                             </div>
                         </div>
@@ -71,7 +83,7 @@
 
     @section('page-scripts')
         <script>
-            $('#experience,#industry,#category,#payment_type').select2({
+            $('#experience,#industry,#category,#payment_type,#project_length,#project_size').select2({
                 placeholder: "Select option",
                 allowClear: true,
                 minimumResultsForSearch: -1,
@@ -83,6 +95,19 @@
                 allowClear: true,
                 tags: true,
                 width: '100%',
+                createTag: function(params) {
+                    var term = $.trim(params.term);
+
+                    if (term === '') {
+                        return null;
+                    }
+
+                    return {
+                        id: 'new_skill_' + term,
+                        text: term,
+                        newTag: true
+                    }
+                }
             });
 
 

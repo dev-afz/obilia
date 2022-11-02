@@ -28,7 +28,7 @@ class Form extends Component
         string $method = "POST",
         string $btnText = null,
         bool $reset = true,
-        bool $block = true,
+        string $block = 'body',
         int $reload = 0,
         string $successCallback = "none",
         string $errorCallback = "none",

@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class WorkLength extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
 }

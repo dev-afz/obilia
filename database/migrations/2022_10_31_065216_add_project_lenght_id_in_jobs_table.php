@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('jobs', function (Blueprint $table) {
-            $table->foreignId('project_length_id')->after('metadata');
+            $table->foreignId('work_length_id')->after('metadata');
         });
     }
 

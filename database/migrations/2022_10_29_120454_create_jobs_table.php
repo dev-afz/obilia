@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('payment_type', ['fixed', 'hourly']);
             $table->float('work_hours')->nullable();
             $table->enum('size', ['small', 'medium', 'large']);
-            $table->enum('visibility', ['public', 'private', 'hidden']);
+            $table->enum('visibility', ['public', 'private', 'hidden'])->default('public');
             $table->string('country');
             $table->float('rate_from');
             $table->float('rate_to');

@@ -52,7 +52,7 @@
                 form: this,
                 url: "{{ $route }}",
                 method: "POST",
-                block: {{ $block }},
+                block: '{{ $block }}',
                 reset: {{ $rst }},
                 reload: {{ $rld }},
                 successCallback: {{ $successCallback }},

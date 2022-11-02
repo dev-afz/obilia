@@ -16,8 +16,13 @@ return new class extends Migration
         Schema::create('job_skills', function (Blueprint $table) {
             $table->id();
             $table->foreignId('job_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('skill_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('skill_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('other_skill')->nullable();
             $table->timestamps();
+
+            $table->index('other_skill');
+
+            // $table->unique(['job_id', 'skill_id', 'other_skill']);
         });
     }
 
