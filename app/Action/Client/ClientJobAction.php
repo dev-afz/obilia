@@ -4,6 +4,7 @@ namespace App\Action\Client;
 
 
 use App\Models\Job;
+use App\Models\User;
 use App\Models\JobSkill;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class ClientJobAction
 {
 
-    public function jobStoreAction(Request $request): void
+    public function jobStoreAction(Request $request, User $user): void
     {
         DB::beginTransaction();
         $job = Job::create([
@@ -29,6 +30,7 @@ class ClientJobAction
             'sub_category_id' => $request->category,
             'work_length_id' => $request->project_length,
             'size' => $request->project_size,
+            'user_id' => $user->id,
         ]);
         $data = [];
         foreach ($request->skills as $key => $value) {

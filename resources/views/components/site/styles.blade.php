@@ -21,3 +21,4 @@
 <link href="/site/css/notiflix.min.css" rel="stylesheet">
 <link href="/site/css/styles.css" rel="stylesheet">
 <link href="/site/css/override.css" rel="stylesheet">
+<link href="/site/css/color.css" rel="stylesheet">

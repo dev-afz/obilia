@@ -23,8 +23,8 @@
     <div class="Loader"></div>
 
     <div id="main-wrapper">
-
         {!! $slot !!}
+
 
     </div>
     <x-site.footer />

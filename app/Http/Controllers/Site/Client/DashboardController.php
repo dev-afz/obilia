@@ -10,7 +10,19 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('site.dashboard.client.index');
+
+
+        $activeJobs = auth()->user()->posted_jobs()->where('status', 'active')->count();
+        $completedJobs = auth()->user()->posted_jobs()->where('status', 'completed')->count();
+        $cancelledJobs = auth()->user()->posted_jobs()->where('status', 'cancelled')->count();
+        $totalJobs = auth()->user()->posted_jobs()->count();
+
+        return view('site.dashboard.client.index', compact(
+            'activeJobs',
+            'completedJobs',
+            'cancelledJobs',
+            'totalJobs'
+        ));
     }
 
 

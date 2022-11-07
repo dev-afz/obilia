@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components\Site;
+namespace App\View\Components\site;
 
 use Illuminate\View\Component;
 
-class Header extends Component
+class Subcategory extends Component
 {
     /**
      * Create a new component instance.
@@ -12,16 +12,12 @@ class Header extends Component
      * @return void
      */
 
-
-    public $title;
-    public $subtitle;
+    public $subcategories;
 
     public function __construct(
-        $title,
-        $subtitle,
+        $subcategories,
     ) {
-        $this->title = $title;
-        $this->subtitle = $subtitle;
+        $this->subcategories = $subcategories;
     }
 
     /**
@@ -31,6 +27,6 @@ class Header extends Component
      */
     public function render()
     {
-        return view('components.site.header');
+        return view('components.site.subcategory');
     }
 }

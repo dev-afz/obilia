@@ -14,6 +14,22 @@
             </div>
             <!-- Item Wrap Start -->
             <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12">
+
+                @if (auth()->user()->status == 'pending')
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Warning!</strong> Your account is pending approval. Please submit your documents for
+                        approval
+                        or contact us for more information.
+                        {{-- <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> --}}
+                        <button type="button" class="btn btn-sm btn-info float-end" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            Get Started
+                        </button>
+                    </div>
+                @endif
+
                 <div class="row">
                     {{ $slot }}
                 </div>

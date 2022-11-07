@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Site;
 
+use App\Models\Job;
 use Illuminate\View\Component;
 
 class Services extends Component
@@ -11,9 +12,13 @@ class Services extends Component
      *
      * @return void
      */
-    public function __construct()
-    {
-        //
+
+    public $jobs;
+
+    public function __construct(
+        $jobs
+    ) {
+        $this->jobs = $jobs;
     }
 
     /**

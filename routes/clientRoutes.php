@@ -7,7 +7,6 @@ use App\Http\Controllers\Site\Client\DashboardController;
 
 
 Route::name('site.')
-    ->controller(SiteController::class)
     ->group(function () {
 
         Route::prefix('client')

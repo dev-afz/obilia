@@ -35,6 +35,7 @@ const rebound = ({
     notification = true,
     logging = true,
     returnData = false,
+    processData = false,
 
 }) => {
     if (form === null && data === null) {
@@ -46,10 +47,7 @@ const rebound = ({
 
     if (form !== null) {
         const formData = $(form)[0];
-        data = new FormData(formData);
-    }
-    if (data !== null) {
-        data = data;
+        form = new FormData(formData);
     }
     $.ajaxSetup({
         headers: {
@@ -59,9 +57,9 @@ const rebound = ({
     $.ajax({
         url: url,
         method: method,
-        data: data,
-        processData: (data.length > 0) ? true : false,
-        contentType: (data.length > 0) ? true : false,
+        data: data ?? form,
+        processData: processData,
+        contentType: (processData) ? 'application/x-www-form-urlencoded' : 'multipart/form-data',
         beforeSend: function () {
 
             (block !== null) ? Notiflix.Block.hourglass(block) : Notiflix.Loading.hourglass();
@@ -74,9 +72,12 @@ const rebound = ({
             (block !== null) ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
 
             if (reset) {
-                $(form).find('input').each(function () {
-                    $(this).val('').trigger('change');
-                });
+                if (form) {
+                    $(form).find('input').each(function () {
+                        $(this).val('').trigger('change');
+                    });
+                }
+
             }
 
             if (reload) {
@@ -92,15 +93,17 @@ const rebound = ({
                 window.location.href = redirect ?? response.redirect;
             }
             if (successCallback !== null) {
-                successCallback.apply(null, response);
+                successCallback.apply(null, arguments);
             }
 
             if (returnData) {
                 return response;
             }
-            $(form).find('.is-invalid').each(function () {
-                $(this).removeClass('is-invalid');
-            });
+            if (form) {
+                $(form).find('.is-invalid').each(function () {
+                    $(this).removeClass('is-invalid');
+                });
+            }
             return true;
         },
         error: function (xhr, status, error) {
@@ -166,3 +169,21 @@ $(document).on('keyup change', 'form input,select,textarea', function () {
         }
     }
 });
+
+
+$(document).on('change', '[data-like-toggle]', function () {
+    const id = $(this).data('like-toggle');
+    const url = window.location.origin + '/like/job';
+    rebound({
+        url: url,
+        method: 'POST',
+        processData: true,
+        data: {
+            id: id
+        },
+        successCallback: (response) => {
+            console.log(response);
+        }
+    });
+});
+

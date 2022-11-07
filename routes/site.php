@@ -9,10 +9,41 @@ use App\Http\Controllers\Site\Auth\RegistrationController;
 Route::name('site.')
     ->controller(SiteController::class)
     ->group(function () {
-        Route::get('/', 'index')->name('index');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Authentication Routes
+        |--------------------------------------------------------------------------
+        | These routes are used for authentication and registration.
+        |
+        */
+
         Route::post('login', [LoginController::class, 'login'])->name('login');
         Route::get('logout', [LoginController::class, 'logout'])->name('logout');
         Route::post('register', [RegistrationController::class, 'register'])->name('register');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Site Routes
+        |--------------------------------------------------------------------------
+        | These routes are used for the site.
+        |
+        */
+
+        Route::get('/', 'index')->name('index');
+        Route::post('like/job', 'toggleJobLike')->name('like.job');
+        Route::get('cat/{slug}', 'showSubcategory')->name('show-subcategory');
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | OAuth Routes
+        |--------------------------------------------------------------------------
+        | These routes are used for OAuth.
+        |
+        */
 
 
         Route::prefix('auth')

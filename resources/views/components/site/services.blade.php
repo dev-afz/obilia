@@ -12,251 +12,88 @@
         </div>
 
         <div class="row">
-            <!-- Single Item -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="ser_110">
-                    <div class="ser_110_thumb">
-                        <a href="javascript:void(0);" class="likes"><i class="fa fa-heart"></i></a>
-                        <a href="service-detail.html" class="ser_100_link"><img src="site/img/co-2.jpg"
-                                class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="ser_110_caption">
-                        <div class="ser_rev098">
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="ser_title098">
-                            <h4 class="_ser_title"><a href="service-detail.html">Looking To Hire HTML Into WordPress
-                                    Convertor Valuem </a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="ser_110_footer">
-                        <div class="_110_foot_left">
-                            <div class="_autho098"><img src="site/img/team-1.jpg" class="img-fluid circle"
-                                    alt=""><img src="site/img/verify.svg" class="verified" width="12"
-                                    alt=""></div>
-                            <div class="_autho097">
-                                <h5><a href="author-detail.html">Adam Kioke</a></h5><span>0 Order in
-                                    Queue<span></span></span>
-                            </div>
-                        </div>
-                        <div class="_110_foot_right">
-                            <div class="_oi0po"><i class="fa fa-bolt"></i>From<strong class="theme-cl">$150.00</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @forelse ($jobs as $job)
+                {{-- {{ dd($job) }} --}}
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="ser_110">
+                        <div class="ser_110_thumb">
+                            <a href="javascript:void(0);" class="likes"><i class="fa fa-heart"></i></a>
 
-            <!-- Single Item -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="ser_110">
-                    <div class="ser_110_thumb">
-                        <a href="javascript:void(0);" class="likes"><i class="fa fa-heart"></i></a>
-                        <a href="service-detail.html" class="ser_100_link"><img src="site/img/co-3.jpg"
-                                class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="ser_110_caption">
-                        <div class="ser_rev098">
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star"></i>
                         </div>
-                        <div class="ser_title098">
-                            <h4 class="_ser_title"><a href="service-detail.html">Looking To Hire HTML Into Joomla
-                                    Convertor Level </a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="ser_110_footer">
-                        <div class="_110_foot_left">
-                            <div class="_autho098"><img src="site/img/team-2.jpg" class="img-fluid circle"
-                                    alt=""><img src="site/img/verify.svg" class="verified" width="12"
-                                    alt=""></div>
-                            <div class="_autho097">
-                                <h5><a href="author-detail.html">J.K. Wong</a></h5><span>01 Order in
-                                    Queue<span></span></span>
-                            </div>
-                        </div>
-                        <div class="_110_foot_right">
-                            <div class="_oi0po"><i class="fa fa-bolt"></i>From<strong class="theme-cl">$160.00</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="ser_110_caption">
+                            <div class="service__top">
+                                <ul class="_requirement_lists">
+                                    @forelse ($job->skills as $skill)
+                                        <li>
+                                            <a href="#">
+                                                <span
+                                                    class="_elios req_3">{{ $skill->skill->name ?? $skill->other_skill }}<span></span></span>
+                                            </a>
+                                        </li>
+                                    @empty
+                                    @endforelse
+                                </ul>
+                                @auth
+                                    <div class="jobs-like bookmark">
+                                        <label class="toggler toggler-danger">
+                                            <input data-like-toggle="{{ $job->id }}" type="checkbox"><i
+                                                class="fa fa-heart"></i></label>
+                                    </div>
+                                @endauth
 
-            <!-- Single Item -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="ser_110">
-                    <div class="ser_110_thumb">
-                        <a href="javascript:void(0);" class="likes"><i class="fa fa-heart"></i></a>
-                        <a href="service-detail.html" class="ser_100_link"><img src="site/img/co-4.jpg"
-                                class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="ser_110_caption">
-                        <div class="ser_rev098">
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="ser_title098">
-                            <h4 class="_ser_title"><a href="service-detail.html">Looking To Hire Graphic Designer For
-                                    UI Component</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="ser_110_footer">
-                        <div class="_110_foot_left">
-                            <div class="_autho098"><img src="site/img/team-3.jpg" class="img-fluid circle"
-                                    alt=""><img src="site/img/verify.svg" class="verified" width="12"
-                                    alt=""></div>
-                            <div class="_autho097">
-                                <h5><a href="author-detail.html">K.M. Singh</a></h5><span>01 Order in
-                                    Queue<span></span></span>
+                                @guest
+                                    <div class="jobs-like bookmark">
+                                        <label class="toggler toggler-danger">
+                                            <input data-uncheckable data-bs-toggle="modal" data-bs-target="#login"
+                                                type="checkbox"><i class="fa fa-heart"></i></label>
+                                    </div>
+                                @endguest
+                            </div>
+                            <div class="ser_title098">
+                                <h4 class="_ser_title"><a href="service-detail.html">
+                                        {{ $job->title }}
+                                    </a></h4>
+                                <p>
+                                    {{ $job->shortDesc }}
+                                </p>
                             </div>
                         </div>
-                        <div class="_110_foot_right">
-                            <div class="_oi0po"><i class="fa fa-bolt"></i>From<strong
-                                    class="theme-cl">$170.00</strong></div>
+                        <div class="ser_110_footer">
+                            <div class="_110_foot_left">
+                                <div class="_autho098"><img
+                                        src="@if ($job->client->image) {{ asset($job->client->image) }} @else {{ asset('site/img/team-1.jpg') }} @endif"
+                                        class="img-fluid circle" alt="">
+                                    {{-- <img src="site/img/verify.svg" class="verified" width="12" alt=""> --}}
+                                </div>
+                                <div class="_autho097">
+                                    <h5><a href="author-detail.html">{{ $job->client->name }}</a></h5><span>1 job
+                                        Posted<span></span></span>
+                                </div>
+                            </div>
+                            <div class="_110_foot_right">
+                                <div class="_oi0po"><i class="fa fa-bolt"></i>From<strong class="theme-cl">
+                                        ₹{{ $job->rate_from }} - ₹{{ $job->rate_to }}
+                                    </strong>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @empty
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="ser_110">
+                        <div class="ser_110_caption">
+                            <div class="ser_title098">
+                                <h4 class="_ser_title"></h4>No Services Found</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforelse
 
-            <!-- Single Item -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="ser_110">
-                    <div class="ser_110_thumb">
-                        <a href="javascript:void(0);" class="likes"><i class="fa fa-heart"></i></a>
-                        <a href="service-detail.html" class="ser_100_link"><img src="site/img/co-5.jpg"
-                                class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="ser_110_caption">
-                        <div class="ser_rev098">
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="ser_title098">
-                            <h4 class="_ser_title"><a href="service-detail.html">Need UI/UX Developer for My
-                                    Company</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="ser_110_footer">
-                        <div class="_110_foot_left">
-                            <div class="_autho098"><img src="site/img/team-4.jpg" class="img-fluid circle"
-                                    alt=""><img src="site/img/verify.svg" class="verified" width="12"
-                                    alt=""></div>
-                            <div class="_autho097">
-                                <h5><a href="author-detail.html">Kumil Kural</a></h5><span>04 Order in
-                                    Queue<span></span></span>
-                            </div>
-                        </div>
-                        <div class="_110_foot_right">
-                            <div class="_oi0po"><i class="fa fa-bolt"></i>From<strong
-                                    class="theme-cl">$165.00</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Single Item -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="ser_110">
-                    <div class="ser_110_thumb">
-                        <a href="javascript:void(0);" class="likes"><i class="fa fa-heart"></i></a>
-                        <a href="service-detail.html" class="ser_100_link"><img src="site/img/co-6.jpg"
-                                class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="ser_110_caption">
-                        <div class="ser_rev098">
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="ser_title098">
-                            <h4 class="_ser_title"><a href="service-detail.html">HTMl To Drupal Integration with
-                                    Latest Version</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="ser_110_footer">
-                        <div class="_110_foot_left">
-                            <div class="_autho098"><img src="site/img/team-5.jpg" class="img-fluid circle"
-                                    alt=""><img src="site/img/verify.svg" class="verified" width="12"
-                                    alt=""></div>
-                            <div class="_autho097">
-                                <h5><a href="author-detail.html">Adam Sumireo</a></h5><span>01 Order in
-                                    Queue<span></span></span>
-                            </div>
-                        </div>
-                        <div class="_110_foot_right">
-                            <div class="_oi0po"><i class="fa fa-bolt"></i>From<strong
-                                    class="theme-cl">$180.00</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Single Item -->
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="ser_110">
-                    <div class="ser_110_thumb">
-                        <a href="javascript:void(0);" class="likes"><i class="fa fa-heart"></i></a>
-                        <a href="service-detail.html" class="ser_100_link"><img src="site/img/co-7.jpg"
-                                class="img-fluid" alt=""></a>
-                    </div>
-                    <div class="ser_110_caption">
-                        <div class="ser_rev098">
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star filled"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <div class="ser_title098">
-                            <h4 class="_ser_title"><a href="service-detail.html">Magento02 Instalation with composer
-                                    live Mega.</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="ser_110_footer">
-                        <div class="_110_foot_left">
-                            <div class="_autho098"><img src="site/img/team-1.jpg" class="img-fluid circle"
-                                    alt=""><img src="site/img/verify.svg" class="verified" width="12"
-                                    alt=""></div>
-                            <div class="_autho097">
-                                <h5><a href="author-detail.html">Admin User</a></h5><span>02 Order in
-                                    Queue<span></span></span>
-                            </div>
-                        </div>
-                        <div class="_110_foot_right">
-                            <div class="_oi0po"><i class="fa fa-bolt"></i>From<strong
-                                    class="theme-cl">$190.00</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
 
         </div>
 

@@ -54,3 +54,17 @@ i.side-bar-icon svg {
 .was-validated :invalid ~ .invalid-tooltip {
   display: none !important;
 }
+
+//create light version of all (info, success, warning, danger) badges using mixin
+// @mixin badge-variant($name, $color, $background) {
+//   .bg-light-#{$name} {
+//     color: $color !important;
+//     //make background color lighter and lower opacity
+//     background-color: lighten($background, 10%) !important;
+//   }
+// }
+
+// @include badge-variant("info", #fff, #5e72e4);
+// @include badge-variant("success", #fff, #2dce89);
+// @include badge-variant("warning", #fff, #fb6340);
+// @include badge-variant("danger", #fff, #f5365c);

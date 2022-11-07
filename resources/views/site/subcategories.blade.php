@@ -1,13 +1,12 @@
 <x-site.layout title="Home" :include="['popper', 'owl', 'select2']">
-    <x-site.navbar />
-    <x-site.hero :categories="$categories" />
-    <x-site.jobs-category :categories="$categories" />
-    <x-site.services :jobs="$latest_jobs" />
-    @guest
-        <x-site.join-or-hire />
-    @endguest
-    <x-site.pricing />
-    <x-site.testimonials />
+    <x-site.navbar class="header-light" />
+    <x-site.header title="Subcategories" subtitle="Find the best subcategories for your business" />
+
+    <div class="gray-bg">
+        <div class="container ">
+            <x-site.subcategory :subcategories="$subcategories" />
+        </div>
+    </div>
 
     @guest
         <x-site.signin-modal />

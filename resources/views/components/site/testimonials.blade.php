@@ -102,7 +102,7 @@
     </div>
 </section>
 
-@push('component-scripts')
+@push('component-script')
     <script>
         $('#testemonial-slide').owlCarousel({
             loop: true,

@@ -17,4 +17,23 @@ class SubCategory extends Model
     }
 
     //get parent relation name of polymorphic relation
+
+
+
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    | These scopes are used for filtering.
+    |
+    */
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
 }

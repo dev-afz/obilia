@@ -14,7 +14,13 @@ class JobController extends Controller
 {
     public function index()
     {
-        return view('site.dashboard.client.jobs');
+
+        $user = auth()->user();
+
+        $jobs =  $user->posted_jobs;
+
+
+        return view('site.dashboard.client.jobs', compact('jobs'));
     }
 
     public function create()
@@ -49,20 +55,8 @@ class JobController extends Controller
             'project_size' => 'required|string|in:small,medium,large',
             'total_hours' => 'required|numeric',
         ]);
-
-        // $data = [];
-        // foreach ($request->skills as $key => $value) {
-        //     if (str_contains($value, 'new_skill_')) {
-        //         $data[] = 'new';
-        //     } else {
-        //         $data[] = 'old';
-        //     }
-        // }
-
-        // return $data;
-
-
-        $action->jobStoreAction($request);
+        $user = auth()->user();
+        $action->jobStoreAction($request, $user);
 
         return response()->json([
             'message' => 'Job created successfully'

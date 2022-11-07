@@ -25,14 +25,10 @@
                                 <i class="ti-search"></i>
                                 <select id="jb-category" class="js-states form-control b-0">
                                     <option value="">&nbsp;</option>
-                                    <option value="1">Accounting & Finance</option>
-                                    <option value="2">Telecommunications</option>
-                                    <option value="3">IT Companies</option>
-                                    <option value="4">Art & Design</option>
-                                    <option value="5">Automotive Jobs</option>
-                                    <option value="6">Banking Jobs</option>
-                                    <option value="7">Education Training</option>
-                                    <option value="8">Designing & Multimedia</option>
+                                    @forelse ($categories as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    @empty
+                                    @endforelse
                                 </select>
                             </div>
                         </div>
@@ -45,14 +41,13 @@
                 <div class="featured-category light">
                     <ul>
                         <li>Browse Category:</li>
-                        <li><a href="search-job.html" data-toggle="tooltip" data-original-title="Banking">Banking</a>
-                        </li>
-                        <li><a href="search-job.html" data-toggle="tooltip"
-                                data-original-title="Healthcare">Healthcare</a></li>
-                        <li><a href="search-job.html" data-toggle="tooltip" data-original-title="Software">Software</a>
-                        </li>
-                        <li><a href="search-job.html" data-toggle="tooltip"
-                                data-original-title="Automotive">Automotive</a></li>
+                        @forelse ($categories as $cat)
+                            <li><a href="#" data-toggle="tooltip"
+                                    data-original-title="{{ $cat->name }}">{{ $cat->name }}</a>
+                            </li>
+                        @empty
+                        @endforelse
+
                     </ul>
                 </div>
             </div>

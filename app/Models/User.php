@@ -22,6 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'status',
+        'image'
     ];
 
     /**
@@ -44,6 +46,69 @@ class User extends Authenticatable
     ];
 
 
+
+
+
+
+
+    public function posted_jobs()
+    {
+        return $this->hasMany(Job::class, 'user_id');
+    }
+
+
+    public function liked_jobs()
+    {
+        return $this->morphMany(Like::class, 'likeable');
+    }
+
+
+
+
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |scopes
+    |--------------------------------------------------------------------------
+    |
+    | scopes are used to filter data
+    |
+    */
+
+
+    public function scopeHasLikedJob($job_id)
+    {
+        return $this->liked_jobs()->where('likeable_id', $job_id)->first();
+    }
+
+
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |Custom Methods
+    |--------------------------------------------------------------------------
+    |
+    | Custom methods are used to perform some actions
+    |
+    */
+
+    public function likeJob($likeable)
+    {
+        $this->liked_jobs()->create([
+            'likeable_id' => $likeable,
+        ]);
+    }
+
+    public function unlikeJob($likeable)
+    {
+        $this->liked_jobs()->where('likeable_id', $likeable)->delete();
+    }
 
     public function isUser()
     {

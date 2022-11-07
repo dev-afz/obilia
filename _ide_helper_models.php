@@ -111,9 +111,20 @@ namespace App\Models{
  * @property int|null $experience_level_id
  * @property int|null $sub_category_id
  * @property string|null $metadata
- * @property int $project_length_id
+ * @property int $work_length_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $user_id
+ * @property string $status
+ * @property-read \App\Models\User $client
+ * @property-read \App\Models\ExperienceLevel|null $experience
+ * @property-read mixed $short_desc
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\JobSkill[] $skills
+ * @property-read int|null $skills_count
+ * @property-read \App\Models\SubCategory|null $sub_category
+ * @method static \Illuminate\Database\Eloquent\Builder|Job active()
  * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job query()
@@ -124,16 +135,19 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereMetadata($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job wherePaymentType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Job whereProjectLengthId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereRateFrom($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereRateTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereSubCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereVisibility($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Job whereWorkHours($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job whereWorkLengthId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Job withLikedByUser()
  */
 	class Job extends \Eloquent {}
 }
@@ -144,19 +158,44 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $job_id
- * @property int $skill_id
+ * @property int|null $skill_id
+ * @property string|null $other_skill
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Skill|null $skill
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill active()
  * @method static \Illuminate\Database\Eloquent\Builder|JobSkill newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobSkill newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|JobSkill query()
  * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereOtherSkill($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereSkillId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|JobSkill whereUpdatedAt($value)
  */
 	class JobSkill extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Like
+ *
+ * @property int $id
+ * @property string $likeable_type
+ * @property int $likeable_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Like newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Like newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Like query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Like whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Like whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Like whereLikeableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Like whereLikeableType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Like whereUpdatedAt($value)
+ */
+	class Like extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -259,6 +298,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category|null $category
+ * @method static \Illuminate\Database\Eloquent\Builder|SubCategory active()
  * @method static \Illuminate\Database\Eloquent\Builder|SubCategory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SubCategory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SubCategory query()
@@ -281,17 +321,24 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property string $email
+ * @property string|null $images
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
  * @property string|null $remember_token
  * @property string $role
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $status
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Like[] $liked_jobs
+ * @property-read int|null $liked_jobs_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Job[] $posted_jobs
+ * @property-read int|null $posted_jobs_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|User hasLikedJob()
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
@@ -299,10 +346,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereImages($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
@@ -318,6 +367,7 @@ namespace App\Models{
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|WorkLength active()
  * @method static \Illuminate\Database\Eloquent\Builder|WorkLength newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WorkLength newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|WorkLength query()
