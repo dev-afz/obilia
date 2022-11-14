@@ -22,7 +22,7 @@ class OauthService
         }
         $user = User::where('email', $user->email)->first();
         if (!empty($user)) {
-            Auth::login($user);
+            Auth::login($user, true);
             return  $this->handleRedirect($user);
         }
 

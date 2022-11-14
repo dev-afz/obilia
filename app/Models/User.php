@@ -59,7 +59,7 @@ class User extends Authenticatable
 
     public function liked_jobs()
     {
-        return $this->morphMany(Like::class, 'likeable');
+        return $this->hasMany(Like::class, 'user_id')->where('likeable_type', Job::class);
     }
 
 
@@ -102,12 +102,15 @@ class User extends Authenticatable
     {
         $this->liked_jobs()->create([
             'likeable_id' => $likeable,
+            'likeable_type' => Job::class
         ]);
     }
 
     public function unlikeJob($likeable)
     {
-        $this->liked_jobs()->where('likeable_id', $likeable)->delete();
+        $this->liked_jobs()->where('likeable_id', $likeable)
+            ->where('likeable_type', Job::class)
+            ->delete();
     }
 
     public function isUser()

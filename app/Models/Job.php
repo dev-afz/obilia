@@ -26,6 +26,9 @@ class Job extends Model
     }
 
 
+
+
+
     public function client()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -38,7 +41,12 @@ class Job extends Model
 
     public function experience()
     {
-        return $this->belongsTo(ExperienceLevel::class);
+        return $this->belongsTo(ExperienceLevel::class, 'experience_level_id');
+    }
+
+    public function work_length()
+    {
+        return $this->belongsTo(WorkLength::class, 'work_length_id');
     }
 
     public function sub_category()

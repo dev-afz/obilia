@@ -36,8 +36,6 @@ class LoginController extends Controller
         }
 
 
-        Log::info('redirect : ' . $redirect);
-
         return response()->json([
             'header' => 'Success!!',
             'message' => 'Logged in successfully',

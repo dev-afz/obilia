@@ -1,4 +1,5 @@
 "use strict";
+
 Notiflix.Loading.init({
     zindex: 999999,
 });
@@ -18,6 +19,21 @@ Notiflix.Notify.init({
 
 const notify = Notiflix.Notify;
 
+/*
+|--------------------------------------------------------------------------
+| Supplementary functions
+|--------------------------------------------------------------------------
+|
+| These functions are used from anywhere in the application as supplementary
+|
+*/
+
+
+
+
+
+
+
 const rebound = ({
     form = null,
     data = null,
@@ -27,7 +43,7 @@ const rebound = ({
     reset = true,
     reload = false,
     redirect = null,
-    block = 'body',
+    block = 'empty',
     beforeSendCallback = null,
     successCallback = null,
     errorCallback = null,
@@ -59,18 +75,21 @@ const rebound = ({
         method: method,
         data: data ?? form,
         processData: processData,
-        contentType: (processData) ? 'application/x-www-form-urlencoded' : 'multipart/form-data',
+        contentType: (processData) ? 'application/x-www-form-urlencoded' : false,
         beforeSend: function () {
 
-            (block !== null) ? Notiflix.Block.hourglass(block) : Notiflix.Loading.hourglass();
+            if (block) {
+                (block !== 'empty') ? Notiflix.Block.hourglass(block) : Notiflix.Loading.hourglass();
+            }
             if (beforeSendCallback !== null) {
                 beforeSendCallback.apply(null, arguments);
             }
         },
         success: function (response) {
             (logging) ? console.log(response) : null;
-            (block !== null) ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
-
+            if (block) {
+                (block !== 'empty') ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
+            }
             if (reset) {
                 if (form) {
                     $(form).find('input').each(function () {
@@ -83,10 +102,8 @@ const rebound = ({
             if (reload) {
                 location.reload();
             }
-
-
             if (notification) {
-                notify.success(response.message ?? 'Success!!');
+                notificationManager(response.status, response.message);
             }
             (refresh || response.refresh) ? location.reload() : null;
             if (redirect !== null || (response.redirect !== null && response.redirect !== undefined)) {
@@ -108,7 +125,10 @@ const rebound = ({
         },
         error: function (xhr, status, error) {
             // (logging) ? console.error(error) : null;
-            (block !== null) ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
+            console.log(xhr);
+            if (block) {
+                (block !== 'empty') ? Notiflix.Block.remove(block) : Notiflix.Loading.remove();
+            }
             if (errorCallback !== null) {
                 errorCallback.apply(null, xhr);
             }
@@ -130,19 +150,18 @@ const rebound = ({
         },
         complete: (response) => {
             console.log("complete", response);
-            if (block !== null) {
-                Notiflix.Block.remove(block);
-            } else {
-                Notiflix.Loading.remove();
+            if (block) {
+                if (block !== 'empty') {
+                    Notiflix.Block.remove(block);
+                } else {
+                    Notiflix.Loading.remove();
+                }
             }
             if (completeCallback !== null) {
                 completeCallback.apply(null, response);
             }
         }
     });
-
-
-
 }
 
 
@@ -173,17 +192,30 @@ $(document).on('keyup change', 'form input,select,textarea', function () {
 
 $(document).on('change', '[data-like-toggle]', function () {
     const id = $(this).data('like-toggle');
+    const checkbox = $(this);
+
+    $(this).prop('disabled', true);
+
     const url = window.location.origin + '/like/job';
     rebound({
         url: url,
         method: 'POST',
         processData: true,
+        block: false,
         data: {
             id: id
         },
         successCallback: (response) => {
             console.log(response);
+        },
+        completeCallback: (response) => {
+            $(checkbox).prop('disabled', false);
         }
     });
 });
 
+$(document).on('change', '[data-uncheckable]', function () {
+    if ($(this).is(':checked')) {
+        $(this).prop('checked', false).trigger('change');
+    }
+});

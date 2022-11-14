@@ -2,27 +2,24 @@
 
 namespace App\View\Components\Site;
 
+use App\Models\Job;
 use Illuminate\View\Component;
 
-class Pricing extends Component
+class JobDetails extends Component
 {
     /**
      * Create a new component instance.
      *
      * @return void
      */
-
-    public $packages;
+    public $job;
+    public $showControl;
     public function __construct(
-        $packages = null
+        Job $job,
+        bool $showControl = false
     ) {
-        if ($packages == null) {
-            $this->packages = \App\Models\Package::active()
-                ->with(['perks'])
-                ->get();
-        } else {
-            $this->packages = $packages;
-        }
+        $this->job = $job;
+        $this->showControl = $showControl;
     }
 
     /**
@@ -32,6 +29,6 @@ class Pricing extends Component
      */
     public function render()
     {
-        return view('components.site.pricing');
+        return view('components.site.job-details');
     }
 }

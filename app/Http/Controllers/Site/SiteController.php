@@ -16,7 +16,9 @@ class SiteController extends Controller
         $latest_jobs = Job::active()
             ->with(['client:id,name', 'skills' => ['skill:id,name']])
             ->when(auth()->check(), function ($query) {
-                $query->withLikedByUser(auth()->id());
+                $query->withCount(['likes' => function ($query) {
+                    $query->where('user_id', auth()->id());
+                }]);
             })
             ->latest()
             ->take(6)
@@ -63,7 +65,29 @@ class SiteController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Job liked successfully',
+            'message' => $liked ? 'Job unliked' : 'Job liked',
         ]);
+    }
+
+
+
+    public function job($slug)
+    {
+        $job = Job::active()
+            ->with([
+                'client:id,name',
+                'skills' => ['skill:id,name'],
+                'sub_category:id,name',
+                'experience:id,name,slug',
+                'work_length:id,name,slug',
+            ])
+            ->when(auth()->check(), function ($query) {
+                $query->withCount(['likes' => function ($query) {
+                    $query->where('user_id', auth()->id());
+                }]);
+            })
+            ->where('slug', $slug)
+            ->firstOrFail();
+        return view('site.job-details', compact('job'));
     }
 }

@@ -12,80 +12,53 @@
         </div>
 
         <div class="row">
-            <!-- Single Pricing Box -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="pricing_boxes">
-                    <div class="pricing_boxes_header">
-                        <div class="pricing_thumb_title">
-                            <h4>Basic</h4>
-                            <p>For organising every corner of your life</p>
+            @foreach ($packages as $package)
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="pricing_boxes">
+                        <div class="pricing_boxes_header">
+                            <div class="pricing_thumb_title">
+                                <h4>{{ $package->name }}</h4>
+                                <p>{{ $package->title }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pricing_boxes_middle">
-                        <h2 class="pricing_rate">$29</h2>
-                        <span class="time_esti">per month</span>
-                        <a href="#" class="btn pricing_btn">Get Started</a>
-                    </div>
-                    <div class="pricing_boxes_detail">
-                        <ul class="pricing_lists">
-                            <li>Access Whole Items</li>
-                            <li>Sync across device</li>
-                            <li>Share with 5 guests</li>
-                            <li>24x7 Email Support</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                        <div class="pricing_boxes_middle">
+                            <h2 class="pricing_rate">₹{{ $package->price }}</h2>
+                            <span class="time_esti">
+                                @switch($package->duration)
+                                    @case(30)
+                                        Per Month
+                                    @break
 
-            <!-- Single Pricing Box -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="pricing_boxes featured">
-                    <div class="pricing_boxes_header">
-                        <div class="pricing_thumb_title">
-                            <h4>Professional</h4>
-                            <p>For organising every corner of your life</p>
-                        </div>
-                    </div>
-                    <div class="pricing_boxes_middle">
-                        <h2 class="pricing_rate">$99</h2>
-                        <span class="time_esti">Per 1 Year</span>
-                        <a href="#" class="btn pricing_btn">Get Started</a>
-                    </div>
-                    <div class="pricing_boxes_detail">
-                        <ul class="pricing_lists">
-                            <li>Access Whole Items</li>
-                            <li>Sync across device</li>
-                            <li>Share with 10 guests</li>
-                            <li>24x7 Email Support</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+                                    @case(90)
+                                        Per Quarter
+                                    @break
 
-            <!-- Single Pricing Box -->
-            <div class="col-lg-4 col-md-4 col-sm-12">
-                <div class="pricing_boxes">
-                    <div class="pricing_boxes_header">
-                        <div class="pricing_thumb_title">
-                            <h4>Organisation</h4>
-                            <p>For organising every corner of your life</p>
+                                    @case(180)
+                                        Per Half Year
+                                    @break
+
+                                    @case(365)
+                                        Per Year
+                                    @break
+
+                                    @default
+                                        Not Specified
+                                @endswitch
+                            </span>
+                            <a href="#" class="btn pricing_btn">Get Started</a>
+                        </div>
+                        <div class="pricing_boxes_detail">
+                            <ul class="pricing_lists">
+                                @forelse ($package->perks as $perk)
+                                    <li>{{ Str::of($perk->name)->replace('_', ' ')->title() }}</li>
+                                @empty
+                                    <li class="text-danger">No perks available</li>
+                                @endforelse
+                            </ul>
                         </div>
                     </div>
-                    <div class="pricing_boxes_middle">
-                        <h2 class="pricing_rate">$199</h2>
-                        <span class="time_esti">Lifetime</span>
-                        <a href="#" class="btn pricing_btn">Get Started</a>
-                    </div>
-                    <div class="pricing_boxes_detail">
-                        <ul class="pricing_lists">
-                            <li>Access Whole Items</li>
-                            <li>Sync across device</li>
-                            <li>Share with 5 guests</li>
-                            <li>24x7 Email Support</li>
-                        </ul>
-                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
 
     </div>

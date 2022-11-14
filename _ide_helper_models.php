@@ -186,6 +186,7 @@ namespace App\Models{
  * @property int $likeable_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $user_id
  * @method static \Illuminate\Database\Eloquent\Builder|Like newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Like newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Like query()
@@ -194,6 +195,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Like whereLikeableId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Like whereLikeableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Like whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Like whereUserId($value)
  */
 	class Like extends \Eloquent {}
 }
@@ -217,6 +219,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PackagePerk[] $perks
  * @property-read int|null $perks_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Package active()
  * @method static \Illuminate\Database\Eloquent\Builder|Package newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Package newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Package query()

@@ -33,6 +33,7 @@ Route::name('site.')
         Route::get('/', 'index')->name('index');
         Route::post('like/job', 'toggleJobLike')->name('like.job');
         Route::get('cat/{slug}', 'showSubcategory')->name('show-subcategory');
+        Route::get('service/{slug}', 'job')->name('job.show');
 
 
 

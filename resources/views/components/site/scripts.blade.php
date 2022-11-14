@@ -32,6 +32,7 @@
 
 <script src="/site/js/notiflix.min.js"></script>
 <script src="/site/js/custom.js"></script>
+<script src="/site/js/supplementary.js"></script>
 <script src="/site/js/init.js"></script>
 
 @yield('page-scripts')

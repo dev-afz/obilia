@@ -574,6 +574,7 @@
     "/site/js/owl.carousel.min.js": "/site/js/owl.carousel.min.js",
     "/site/js/popper.min.js": "/site/js/popper.min.js",
     "/site/js/select2.min.js": "/site/js/select2.min.js",
+    "/site/css/bootstrap-extended.min.css": "/site/css/bootstrap-extended.min.css",
     "/site/css/color.css": "/site/css/color.css",
     "/site/css/notiflix.min.css": "/site/css/notiflix.min.css",
     "/site/css/plugins.css": "/site/css/plugins.css",
@@ -676,5 +677,6 @@
     "/vendors/css/editors/quill/fonts/KaTeX_Main-Regular.woff2": "/vendors/css/editors/quill/fonts/KaTeX_Main-Regular.woff2",
     "/vendors/css/editors/quill/fonts/KaTeX_Math-Italic.woff2": "/vendors/css/editors/quill/fonts/KaTeX_Math-Italic.woff2",
     "/site/js/init.js": "/site/js/init.js",
+    "/site/js/supplementary.js": "/site/js/supplementary.js",
     "/js/init.js": "/js/init.js"
 }

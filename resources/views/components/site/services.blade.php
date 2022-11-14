@@ -14,12 +14,8 @@
         <div class="row">
             @forelse ($jobs as $job)
                 {{-- {{ dd($job) }} --}}
-                <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="col-lg-4 col-md-6 col-sm-12 ">
                     <div class="ser_110">
-                        <div class="ser_110_thumb">
-                            <a href="javascript:void(0);" class="likes"><i class="fa fa-heart"></i></a>
-
-                        </div>
                         <div class="ser_110_caption">
                             <div class="service__top">
                                 <ul class="_requirement_lists">
@@ -36,8 +32,8 @@
                                 @auth
                                     <div class="jobs-like bookmark">
                                         <label class="toggler toggler-danger">
-                                            <input data-like-toggle="{{ $job->id }}" type="checkbox"><i
-                                                class="fa fa-heart"></i></label>
+                                            <input @checked($job->likes_count) data-like-toggle="{{ $job->id }}"
+                                                type="checkbox"><i class="fa fa-heart"></i></label>
                                     </div>
                                 @endauth
 
@@ -50,7 +46,7 @@
                                 @endguest
                             </div>
                             <div class="ser_title098">
-                                <h4 class="_ser_title"><a href="service-detail.html">
+                                <h4 class="_ser_title"><a href="{{ route('site.job.show', $job->slug) }}">
                                         {{ $job->title }}
                                     </a></h4>
                                 <p>
@@ -66,7 +62,7 @@
                                     {{-- <img src="site/img/verify.svg" class="verified" width="12" alt=""> --}}
                                 </div>
                                 <div class="_autho097">
-                                    <h5><a href="author-detail.html">{{ $job->client->name }}</a></h5><span>1 job
+                                    <h5><a href="#">{{ $job->client->name }}</a></h5><span>1 job
                                         Posted<span></span></span>
                                 </div>
                             </div>

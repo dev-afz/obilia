@@ -3,9 +3,13 @@
     <x-site.hero :categories="$categories" />
     <x-site.jobs-category :categories="$categories" />
     <x-site.services :jobs="$latest_jobs" />
+
+
     @guest
         <x-site.join-or-hire />
     @endguest
+
+
     <x-site.pricing />
     <x-site.testimonials />
 

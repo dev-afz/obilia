@@ -15,4 +15,21 @@ class Package extends Model
     {
         return $this->hasMany(PackagePerk::class);
     }
+
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 'active');
+    }
 }

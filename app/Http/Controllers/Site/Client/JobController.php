@@ -62,4 +62,24 @@ class JobController extends Controller
             'message' => 'Job created successfully'
         ]);
     }
+
+
+    public function details($slug)
+    {
+        $job = auth()->user()->posted_jobs()
+            ->with([
+                'client:id,name',
+                'skills' => ['skill:id,name'],
+                'sub_category:id,name',
+                'experience:id,name,slug',
+                'work_length:id,name,slug',
+            ])
+            ->when(auth()->check(), function ($query) {
+                $query->withCount(['likes' => function ($query) {
+                    $query->where('user_id', auth()->id());
+                }]);
+            })
+            ->where('slug', $slug)->firstOrFail();
+        return view('site.dashboard.client.job-details', compact('job'));
+    }
 }

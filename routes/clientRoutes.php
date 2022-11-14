@@ -21,6 +21,7 @@ Route::name('site.')
                     ->controller(JobController::class)
                     ->group(function () {
                         Route::get('/', 'index')->name('index');
+                        Route::get('/{slug}/details', 'details')->name('details');
                         Route::get('create', 'create')->name('create');
                         Route::post('store', 'store')->name('store');
                     });

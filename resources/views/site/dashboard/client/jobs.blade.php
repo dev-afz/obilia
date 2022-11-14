@@ -3,6 +3,8 @@
 
     <x-site.dashboard.body>
 
+
+
         <div class="col-lg-12 col-md-12 col-sm-12">
 
             <!-- Single Wrap -->
@@ -18,11 +20,9 @@
 
                         @forelse ($jobs as $job)
                             <div class="_dash_singl_box">
-                                {{-- <div class="_dash_singl_thumbs">
-                                    <img src="assets/img/c-1.png" class="img-fluid" alt="">
-                                </div> --}}
                                 <div class="_dash_singl_captions">
-                                    <h4 class="_jb_title"><a href="#">{{ $job->title }}</a>
+                                    <h4 class="_jb_title"><a
+                                            href="{{ route('site.client.jobs.details', $job->slug) }}">{{ $job->title }}</a>
 
                                         {{-- <span class="_dash_status approval">pending Approval</span> --}}
                                         @if ($job->status == 'pending')
