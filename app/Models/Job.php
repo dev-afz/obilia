@@ -26,9 +26,6 @@ class Job extends Model
     }
 
 
-
-
-
     public function client()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -58,6 +55,24 @@ class Job extends Model
     public function category()
     {
         return $this->belongsToThrough(Category::class, SubCategory::class);
+    }
+
+
+    public function applications()
+    {
+        return $this->hasMany(JobApplication::class, 'job_id');
+    }
+
+
+
+    public function invites()
+    {
+        return $this->hasMany(JobInvitation::class, 'job_id');
+    }
+
+    public function hired_candidates()
+    {
+        return $this->hasMany(JobApplication::class, 'job_id')->where('status', 'accepted');
     }
 
 

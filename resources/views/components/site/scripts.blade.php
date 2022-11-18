@@ -34,6 +34,13 @@
 <script src="/site/js/custom.js"></script>
 <script src="/site/js/supplementary.js"></script>
 <script src="/site/js/init.js"></script>
+<script>
+    @if (session('error'))
+        $(document).ready(function() {
+            notify.failure("{{ session('error') }}");
+        });
+    @endif
+</script>
 
 @yield('page-scripts')
 @stack('component-script')

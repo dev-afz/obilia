@@ -1,5 +1,5 @@
 
-const notificationManager = (type = 'info', message) => {
+const notificationManager = (type = 'info', message = 'No Message') => {
     switch (type) {
         case 'success':
             Notiflix.Notify.success(message);
@@ -18,6 +18,7 @@ const notificationManager = (type = 'info', message) => {
             break;
     }
 }
+
 
 
 

@@ -3,6 +3,8 @@
 namespace App\View\Components\Site;
 
 use App\Models\Job;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
 class JobDetails extends Component
@@ -13,13 +15,16 @@ class JobDetails extends Component
      * @return void
      */
     public $job;
+    public $suggestedCandidates;
     public $showControl;
     public function __construct(
         Job $job,
-        bool $showControl = false
+        bool $showControl = false,
+        array|Collection  $suggestedCandidates = null
     ) {
         $this->job = $job;
         $this->showControl = $showControl;
+        $this->suggestedCandidates = $suggestedCandidates;
     }
 
     /**

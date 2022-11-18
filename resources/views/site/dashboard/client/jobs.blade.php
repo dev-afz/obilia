@@ -51,7 +51,8 @@
 
                                 </div>
                                 <ul class="_action_grouping_list d-flex">
-                                    <li><a href="#" class="_aaplied_candidates">Applied<span>0</span></a>
+                                    <li><a href="#"
+                                            class="_aaplied_candidates">Applied<span>{{ $job->applications_count }}</span></a>
                                     </li>
                                     <li><a href="#" data-toggle="tooltip" data-placement="top" title="Edit job"
                                             class="_edit_list_point"><i class="fa fa-edit"></i></a>
@@ -74,6 +75,7 @@
 
 
                     </div>
+                    {!! $jobs->links() !!}
                 </div>
             </div>
             <!-- Single Wrap End -->

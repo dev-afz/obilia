@@ -21,6 +21,12 @@ Route::name('site.')
                     ->controller(JobController::class)
                     ->group(function () {
                         Route::get('/', 'index')->name('index');
+                        Route::get('/applications', 'applications')->name('applications');
+                        Route::post('/application-action', 'applicationAction')->name('application-action');
+                        Route::post('/invite-candidate', 'inviteCandidate')->name('invite-candidate');
+                        Route::get('/invited-candidates', 'invitedCandidates')->name('invited-candidates');
+                        Route::get('/hired-candidates', 'hiredCandidates')->name('hired-candidates');
+                        Route::get('/suggested-candidates', 'suggestedCandidates')->name('suggested-candidates');
                         Route::get('/{slug}/details', 'details')->name('details');
                         Route::get('create', 'create')->name('create');
                         Route::post('store', 'store')->name('store');

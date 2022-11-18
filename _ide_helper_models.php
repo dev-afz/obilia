@@ -124,6 +124,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\JobSkill[] $skills
  * @property-read int|null $skills_count
  * @property-read \App\Models\SubCategory|null $sub_category
+ * @property-read \App\Models\WorkLength $work_length
  * @method static \Illuminate\Database\Eloquent\Builder|Job active()
  * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
@@ -358,6 +359,19 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\UserSkill
+ *
+ * @property-read \App\Models\Skill $skill
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSkill newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSkill newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserSkill query()
+ */
+	class UserSkill extends \Eloquent {}
 }
 
 namespace App\Models{

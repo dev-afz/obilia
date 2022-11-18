@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use File;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;

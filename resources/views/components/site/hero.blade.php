@@ -12,27 +12,13 @@
                     incididunt ut labore.</p>
                 <form class="search-big-form banner-search shadow mt-3">
                     <div class="row m-0">
-                        <div class="col-lg-5 col-md-5 col-sm-12 p-0">
+                        <div class="col-lg-10 col-md-10 col-sm-12 p-0">
                             <div class="form-group">
                                 <i class="ti-search"></i>
                                 <input type="text" class="form-control b-0 b-r l-radius"
                                     placeholder="Job Title or Keywords">
                             </div>
                         </div>
-
-                        <div class="col-lg-5 col-md-4 col-sm-12 p-0">
-                            <div class="form-group">
-                                <i class="ti-search"></i>
-                                <select id="jb-category" class="js-states form-control b-0">
-                                    <option value="">&nbsp;</option>
-                                    @forelse ($categories as $cat)
-                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-                                    @empty
-                                    @endforelse
-                                </select>
-                            </div>
-                        </div>
-
                         <div class="col-lg-2 col-md-3 col-sm-12 p-0">
                             <button type="button" class="btn theme-bg full-width r-radius">Search</button>
                         </div>
@@ -42,7 +28,7 @@
                     <ul>
                         <li>Browse Category:</li>
                         @forelse ($categories as $cat)
-                            <li><a href="#" data-toggle="tooltip"
+                            <li><a href="{{ route('site.show-subcategory', $cat->slug) }}" data-toggle="tooltip"
                                     data-original-title="{{ $cat->name }}">{{ $cat->name }}</a>
                             </li>
                         @empty

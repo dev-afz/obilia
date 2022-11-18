@@ -25,3 +25,4 @@
 <link href="/site/css/bootstrap-extended.min.css" rel="stylesheet">
 
 @yield('page-styles')
+@stack('component-style')

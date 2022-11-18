@@ -13,9 +13,15 @@
             "submenu": [
                 {
                     "url": "user/jobs",
-                    "name": "Jobs",
+                    "name": "Applied Jobs",
                     "icon": null,
                     "slug": "site.user.jobs.index"
+                },
+                {
+                    "url": "user/jobs/invitations",
+                    "name": "Job invitations",
+                    "icon": null,
+                    "slug": "site.user.jobs.invitations"
                 }
             ]
         }

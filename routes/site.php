@@ -34,6 +34,8 @@ Route::name('site.')
         Route::post('like/job', 'toggleJobLike')->name('like.job');
         Route::get('cat/{slug}', 'showSubcategory')->name('show-subcategory');
         Route::get('service/{slug}', 'job')->name('job.show');
+        Route::get('search', 'jobSearch')->name('job.search');
+        Route::post('send-proposal', 'sendJobProposal')->name('job.proposal');
 
 
 

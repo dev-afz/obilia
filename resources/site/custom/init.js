@@ -60,10 +60,10 @@ const rebound = ({
     if (url === null) {
         throw new Error('No url provided in rebound()');
     }
-
+    let form_data;
     if (form !== null) {
         const formData = $(form)[0];
-        form = new FormData(formData);
+        form_data = new FormData(formData);
     }
     $.ajaxSetup({
         headers: {
@@ -73,7 +73,7 @@ const rebound = ({
     $.ajax({
         url: url,
         method: method,
-        data: data ?? form,
+        data: data ?? form_data,
         processData: processData,
         contentType: (processData) ? 'application/x-www-form-urlencoded' : false,
         beforeSend: function () {
@@ -139,7 +139,6 @@ const rebound = ({
                 $.each(xhr.responseJSON.errors, function (key, item) {
                     notify.failure(item[0]);
                     $(form).find(`[name=${key}]`).addClass('is-invalid');
-                    console.log(key);
                 });
             } else if (xhr.status == 500) {
                 notify.failure(error);
@@ -149,7 +148,7 @@ const rebound = ({
             return false;
         },
         complete: (response) => {
-            console.log("complete", response);
+            // console.log("complete", response);
             if (block) {
                 if (block !== 'empty') {
                     Notiflix.Block.remove(block);

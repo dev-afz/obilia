@@ -146,78 +146,42 @@
                             <div id="send-proposal" class="_wrap_box_slice   @guest disabled @endguest">
                                 <div class="_job_detail_single">
                                     <h4>Send Proposal</h4>
-                                    <form class="proposal-form">
+                                    <form id="send_proposal" class="proposal-form needs-validation" novalidate>
                                         <div class="row">
 
                                             <div class="col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <label>Your Price</label>
                                                     <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">@</span>
-                                                        </div>
-                                                        <input type="text" class="form-control">
+                                                        <input name="price" required type="text" class="form-control">
+
+                                                        <input type="hidden" value="{{ $job->id }}" name="job"
+                                                            id="jb">
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-6 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Days To Complete</label>
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">Days</span>
-                                                        </div>
-                                                        <input type="text" class="form-control">
+                                                    <label>Additional Document</label>
+                                                    <div class="custom-file">
+                                                        <input name="additional_document" type="file"
+                                                            accept="image/*,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                                                            class="custom-file-input d-none" id="job-attach">
+                                                        <label class="custom-file-label" for="job-attach">Choose
+                                                            file</label>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <label>Cover Letter</label>
-                                                    <textarea class="form-control" rows="3"></textarea>
+                                                    <label>Work Letter</label>
+                                                    <textarea name="work_letter" required class="form-control" rows="3"></textarea>
                                                 </div>
                                             </div>
 
                                         </div>
-
-                                        <h4>Advance Addon</h4>
-                                        <div class="row">
-                                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                                <div class="_addon_proposal">
-                                                    <input id="ad1" class="checkbox-custom" name="addon"
-                                                        type="checkbox">
-                                                    <label for="ad1" class="checkbox-custom-label">Make
-                                                        Featured</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                                <div class="_addon_proposal">
-                                                    <input id="ad2" class="checkbox-custom" name="sealed"
-                                                        type="checkbox">
-                                                    <label for="ad2" class="checkbox-custom-label">Sealed
-                                                        Proposal</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                                <div class="_addon_proposal">
-                                                    <input id="ad3" class="checkbox-custom" name="urgent"
-                                                        type="checkbox">
-                                                    <label for="ad3" class="checkbox-custom-label">Make
-                                                        Urgent</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-12 col-sm-12">
-                                                <div class="_addon_proposal">
-                                                    <input id="ad4" class="checkbox-custom" name="member"
-                                                        type="checkbox">
-                                                    <label for="ad4" class="checkbox-custom-label">Add More
-                                                        Member</label>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12 col-sm-12">
                                                 <div class="_terms_policy">
@@ -226,13 +190,12 @@
                                                             type="checkbox">
                                                         <label for="tm" class="checkbox-custom-label"></label>
                                                     </div>
-                                                    <div>I agree to the <a
-                                                            href="https://marketplace.exertiowp.com/terms-and-conditions/">terms
+                                                    <div>I agree to the <a href="#">terms
                                                             and conditions</a></div>
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12">
-                                                <button type="button" class="btn_proposal_send">Send Proposal</button>
+                                                <button type="submit" class="btn_proposal_send">Send Proposal</button>
                                             </div>
                                         </div>
 
@@ -397,17 +360,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link " id="application-tab-fill" data-bs-toggle="tab"
                                         href="#application-fill" role="tab" aria-controls="application-fill"
-                                        aria-selected="true">Application</a>
+                                        aria-selected="true">Applications</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="invite-tab-fill" data-bs-toggle="tab"
                                         href="#invite-fill" role="tab" aria-controls="invite-fill"
-                                        aria-selected="false">Invite</a>
+                                        aria-selected="false">Invites</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="invite-tab-fill" data-bs-toggle="tab"
-                                        href="#invite-fill" role="tab" aria-controls="invite-fill"
-                                        aria-selected="false">Invite</a>
+                                    <a class="nav-link" id="hired-tab-fill" data-bs-toggle="tab" href="#hired-fill"
+                                        role="tab" aria-controls="hired-fill" aria-selected="false">Hired</a>
                                 </li>
                             </ul>
 
@@ -415,54 +377,67 @@
                             <div class="tab-content pt-1">
                                 <div class="tab-pane active" id="suggested-candidates-fill" role="tabpanel"
                                     aria-labelledby="suggested-candidates-tab-fill">
-                                    <p>
-                                        Chocolate cake sweet roll lemon drops marzipan chocolate cake cupcake cotton
-                                        candy.
-                                        Dragée ice cream
-                                        dragée biscuit chupa chups bear claw cupcake brownie cotton candy. Sesame snaps
-                                        topping cupcake cake.
-                                        Macaroon lemon drops gummies danish marzipan donut.
-                                    </p>
+                                    <div data-suggested-candidate class="row">
+
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="tab-pane " id="application-fill" role="tabpanel"
                                     aria-labelledby="application-tab-fill">
-                                    <p>
-                                        Chocolate cake sweet roll lemon drops marzipan chocolate cake cupcake cotton
-                                        candy.
-                                        Dragée ice cream
-                                        dragée biscuit chupa chups bear claw cupcake brownie cotton candy. Sesame snaps
-                                        topping cupcake cake.
-                                        Macaroon lemon drops gummies danish marzipan donut.
-                                    </p>
-                                    <p>
-                                        Chocolate bar soufflé tiramisu tiramisu jelly-o carrot cake gummi bears cake.
-                                        Candy
-                                        canes wafer
-                                        croissant donut bonbon dragée bear claw jelly sugar plum. Sweet lemon drops
-                                        caramels
-                                        croissant
-                                        cheesecake jujubes carrot cake fruitcake. Halvah biscuit lemon drops fruitcake
-                                        tart.
-                                    </p>
+                                    <div data-job-applications class="row">
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane" id="invite-fill" role="tabpanel"
                                     aria-labelledby="invite-tab-fill">
-                                    <p>
-                                        Bear claw jelly beans wafer pastry jelly beans candy macaroon biscuit topping.
-                                        Sesame snaps lemon drops
-                                        donut gingerbread dessert cotton candy wafer croissant jelly beans. Sweet roll
-                                        halvah gingerbread bonbon
-                                        apple pie gummies chocolate bar pastry gummi bears.
-                                    </p>
-                                    <p>
-                                        Croissant danish chocolate bar pie muffin. Gummi bears marshmallow chocolate bar
-                                        bear claw. Fruitcake
-                                        halvah chupa chups dragée carrot cake cookie. Carrot cake oat cake cake
-                                        chocolate
-                                        bar cheesecake. Wafer
-                                        gingerbread sweet roll candy chocolate bar gingerbread.
-                                    </p>
+                                    <div data-invited-candidates class="row">
+                                        <div class="col-12">
+                                            <h2 class="text-center">Work in progress (INVITED)</h2>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="hired-fill" role="tabpanel"
+                                    aria-labelledby="hired-tab-fill">
+                                    <div data-hired-candidates class="row">
+                                        <div class="col-12">
+                                            <h2 class="text-center">Work in progress (HIRED)</h2>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6">
+                                            <x-site.misc.profile-loader />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

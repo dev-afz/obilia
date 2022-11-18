@@ -6,7 +6,7 @@
 
 
     @guest
-        <x-site.join-or-hire />
+        {{-- <x-site.join-or-hire /> --}}
     @endguest
 
 

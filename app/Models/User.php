@@ -63,6 +63,16 @@ class User extends Authenticatable
     }
 
 
+    public function job_applications()
+    {
+        return $this->hasMany(JobApplication::class, 'user_id');
+    }
+
+
+    public function job_invitations()
+    {
+        return $this->hasMany(JobInvitation::class, 'user_id');
+    }
 
 
 
@@ -82,6 +92,16 @@ class User extends Authenticatable
     public function scopeHasLikedJob($job_id)
     {
         return $this->liked_jobs()->where('likeable_id', $job_id)->first();
+    }
+
+    public function scopeIsUser($q)
+    {
+        return $q->where('role', 'user');
+    }
+
+    public function scopeActive($q)
+    {
+        return $q->where('status', 'active');
     }
 
 

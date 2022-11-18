@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Job;
 use App\Models\SubCategory;
+use App\Traits\FileManager;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
+    use FileManager;
     public function index()
     {
 
@@ -89,5 +91,44 @@ class SiteController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
         return view('site.job-details', compact('job'));
+    }
+
+
+
+    public function sendJobProposal(Request $request)
+    {
+        $request->validate(
+            [
+                'price' => 'required|numeric|min:1',
+                'work_letter' => 'required|string|min:50|max:2000',
+                'job' => 'required|exists:jobs,id',
+                'additional_document' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg|max:2048',
+                'terms' => 'required'
+            ],
+            [
+                'terms.required' => 'You must agree to the terms and conditions'
+            ]
+        );
+        $user = auth()->user();
+
+        $proposal = $user->job_applications()->create([
+            'job_id' => $request->job,
+            'bid_price' => $request->price,
+            'work_letter' => $request->work_letter,
+            'document' => ($request->hasFile('additional_document')) ? $this->storeFile($request->file('additional_document'), 'proposals', 'doc') : null,
+        ]);
+
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Proposal sent successfully',
+        ]);
+    }
+
+
+
+    public function jobSearch()
+    {
+        return view('site.job-search');
     }
 }

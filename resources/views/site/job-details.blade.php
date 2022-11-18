@@ -9,7 +9,31 @@
     @endguest
 
     @section('page-scripts')
-        <script></script>
+        <script>
+            $(document).on('change', '.custom-file-input', function() {
+                const fileName = $(this).val().split('\\').pop();
+                if (fileName) {
+                    $(this).next('.custom-file-label').addClass("selected").html(fileName);
+                } else {
+                    $(this).next('.custom-file-label').html('Choose file');
+                }
+            });
+
+
+            $(document).on('submit', '#send_proposal', function(e) {
+                e.preventDefault();
+
+                rebound({
+                    form: this,
+                    url: "{{ route('site.job.proposal') }}",
+                    block: '#send-proposal',
+                    successCallback: function(res) {
+                        console.log(res);
+                    }
+                });
+
+            });
+        </script>
     @endsection
 
 </x-site.layout>

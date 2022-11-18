@@ -21,6 +21,8 @@ Route::name('site.')
                     ->controller(JobController::class)
                     ->group(function () {
                         Route::get('/', 'index')->name('index');
+                        Route::get('invitations', 'invitations')->name('invitations');
+                        Route::get('{id}/details', 'applicationDetails')->name('details');
                     });
             });
     });
