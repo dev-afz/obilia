@@ -18,6 +18,7 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('banner', 3000)->nullable();
             $table->string('slug');
             $table->text('description');
             $table->enum('payment_type', ['fixed', 'hourly']);

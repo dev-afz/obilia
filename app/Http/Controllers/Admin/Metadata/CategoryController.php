@@ -26,7 +26,7 @@ class CategoryController extends Controller
 
         //upload image
 
-        $img = $this->uploadFile($request->image, 'images', 'img');
+        $img = $this->uploadFile($request->image, 'images/category', 'img');
 
         Category::create([
             'name' => $request->name,

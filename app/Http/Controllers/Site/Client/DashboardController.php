@@ -41,4 +41,10 @@ class DashboardController extends Controller
 
         return response()->json($subcategories);
     }
+
+
+    public function profile()
+    {
+        return view('site.dashboard.client.profile');
+    }
 }

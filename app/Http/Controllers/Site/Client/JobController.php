@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\ExperienceLevel;
 use App\Models\JobApplication;
-use App\Models\JobInvitation;
 use App\Models\Skill;
 use App\Models\User;
 use App\Models\WorkLength;
-use App\View\Components\site\InvitedCandidate;
-use App\View\Components\site\JobApplication as JobApplicationComponent;
-use App\View\Components\site\SuggestedCandidate;
-use Illuminate\Support\Facades\Log;
+use App\View\Components\Site\InvitedCandidate;
+use App\View\Components\Site\JobApplication as JobApplicationComponent;
+use App\View\Components\Site\SuggestedCandidate;
 
 class JobController extends Controller
 {
