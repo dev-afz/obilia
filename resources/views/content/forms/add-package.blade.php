@@ -11,16 +11,10 @@
 
 
                         <div class="col-md-6 col-12">
-                            <x-select name="for" placeholder="Select who is this package for" :options="[
-                                'individual' => 'Individual',
-                                'agency' => 'Agency',
-                            ]" />
+                            <x-select name="for" placeholder="Select who is this package for" :options="['individual', 'agency']" />
                         </div>
                         <div class="col-md-6 col-12">
-                            <x-select name="payment_type" placeholder="Select payment type" :options="[
-                                'onetime' => 'One Time',
-                                'subscription' => 'Subscription',
-                            ]" />
+                            <x-select name="payment_type" placeholder="Select payment type" :options="['onetime', 'subscription']" />
                         </div>
 
                         <div class="col-md-6 col-12">
