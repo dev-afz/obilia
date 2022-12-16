@@ -63,6 +63,16 @@ class Job extends Model
         return $this->hasMany(JobApplication::class, 'job_id');
     }
 
+    public function application()
+    {
+        return $this->hasOne(JobApplication::class, 'job_id');
+    }
+
+    public function responsibilities()
+    {
+        return $this->hasMany(JobResponsibility::class, 'job_id');
+    }
+
 
 
     public function invites()
@@ -74,6 +84,15 @@ class Job extends Model
     {
         return $this->hasMany(JobApplication::class, 'job_id')->where('status', 'accepted');
     }
+
+
+
+    public function direct_skill()
+    {
+        return $this->hasManyThrough(Skill::class, JobSkill::class, 'job_id', 'id', 'id', 'skill_id');
+    }
+
+
 
 
     /*
@@ -99,7 +118,10 @@ class Job extends Model
         ]);
     }
 
-
+    public function scopeIsPublic($q)
+    {
+        return $q->where('visibility', 'public');
+    }
 
 
 

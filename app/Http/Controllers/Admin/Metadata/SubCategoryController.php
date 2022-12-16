@@ -21,16 +21,16 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:255|unique:sub_categories,name',
             'category' => 'required|integer|exists:categories,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:100',
         ]);
 
 
         SubCategory::create([
             'name' => $request->name,
             'category_id' => $request->category,
-            'image' => $this->uploadFile($request->image, 'images/sub-category', 'img'),
+            'image' => ($request->image) ? $this->uploadFile($request->image, 'images/sub-category', 'img') : null,
             'slug' => Str::slug($request->name),
         ]);
 
@@ -38,7 +38,7 @@ class SubCategoryController extends Controller
             'header' => 'Sub Category Created',
             'message' => 'Sub Category has been created successfully',
             'refresh_table' => true,
-            'close_canvas' => 'addCanvas',
+            // 'close_canvas' => 'addCanvas',
         ]);
     }
 }

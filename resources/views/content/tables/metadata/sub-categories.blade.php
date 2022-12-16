@@ -29,17 +29,13 @@
 
     <x-offcanvas id="addCanvas" title="Add Sub Category">
         <x-form class="g-1" id="add-sub-category" :route="route('admin.metadata.sub-categories.store')">
-
-            <div class="col-12">
-                <x-input name="name" />
-            </div>
-            <div class="col-12">
-                <x-input-file name="image" />
-            </div>
-
             <div class="col-12">
                 <x-select name="category" :options="$categories" />
             </div>
+            <div class="col-12">
+                <x-input name="name" />
+            </div>
+
         </x-form>
     </x-offcanvas>
 

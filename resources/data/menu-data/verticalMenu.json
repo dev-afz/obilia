@@ -16,6 +16,12 @@
             "slug": "",
             "submenu": [
                 {
+                    "url": "/metadata/industries",
+                    "name": "Industries",
+                    "icon": "circle",
+                    "slug": "admin.metadata.industries.index"
+                },
+                {
                     "url": "/metadata/categories",
                     "name": "Categories",
                     "icon": "circle",

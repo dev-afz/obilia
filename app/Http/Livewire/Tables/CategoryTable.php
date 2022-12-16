@@ -4,9 +4,9 @@ namespace App\Http\Livewire\Tables;
 
 use App\Models\Category;
 use App\Exports\CategoryExport;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
@@ -31,6 +31,9 @@ class CategoryTable extends DataTableComponent
                 ->sortable(),
 
             Column::make("Name", "name")
+                ->searchable()
+                ->sortable(),
+            Column::make("Industry", "industry.name")
                 ->searchable()
                 ->sortable(),
             Column::make("Image", "image")
@@ -77,6 +80,13 @@ class CategoryTable extends DataTableComponent
         ];
     }
 
+
+
+    public function query(): Builder
+    {
+        return Category::query()
+            ->with('industry');
+    }
 
 
     public function bulkActions(): array

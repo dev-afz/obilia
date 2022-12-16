@@ -27,6 +27,10 @@ class Category extends Model
     }
 
 
+    public function industry()
+    {
+        return $this->belongsTo(Industry::class);
+    }
 
 
 

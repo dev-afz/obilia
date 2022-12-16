@@ -32,8 +32,10 @@
     </section>
 
     <x-offcanvas id="addCategoryCanvas" title="Add Category">
-        <x-form class="g-1" id="add-category" :route="route('admin.metadata.categories.store')">
-
+        <x-form id="add-category" :route="route('admin.metadata.categories.store')">
+            <div class="col-12">
+                <x-select name="industry" :options="$industries" />
+            </div>
             <div class="col-12">
                 <x-input name="name" />
             </div>

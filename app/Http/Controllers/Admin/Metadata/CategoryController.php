@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Industry;
 use App\Traits\FileManager;
 
 class CategoryController extends Controller
@@ -14,14 +15,16 @@ class CategoryController extends Controller
 
     public function index()
     {
-        return view('content.tables.metadata.categories');
+        $industries = Industry::active()->get();
+        return view('content.tables.metadata.categories', compact('industries'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:512',
+            'name' => 'required|string|max:255|unique:categories,name',
+            'image' => 'required|image|mimes:jpeg,png,jpg,svg,gif,webp|max:100',
+            'industry' => 'required|exists:industries,id'
         ]);
 
         //upload image
@@ -32,6 +35,7 @@ class CategoryController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'image' => $img,
+            'industry_id' => $request->industry
         ]);
 
         return response([

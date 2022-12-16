@@ -2,16 +2,20 @@
 
 namespace App\Http\Livewire\Tables;
 
-use App\Models\SubCategory;
-use Illuminate\Database\Eloquent\Builder;
+use App\Models\Industry;
+use App\Exports\IndustryExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Facades\Log;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
-class SubCategoryTable extends DataTableComponent
+class IndustryTable extends DataTableComponent
 {
-    protected $model = SubCategory::class;
+    protected $model = Industry::class;
 
     public function configure(): void
     {
@@ -29,9 +33,11 @@ class SubCategoryTable extends DataTableComponent
             Column::make("Name", "name")
                 ->searchable()
                 ->sortable(),
-            Column::make("Category", "category.name")
-                ->searchable()
-                ->sortable(),
+            Column::make("Image", "image")
+                ->format(function ($value, $column, $row) {
+                    return view('content.table-component.avatar', ['image' => $value]);
+                })
+                ->html(),
             Column::make("Status", "status")
                 ->format(function ($value, $column, $row) {
                     ($value === 'active') ? $status = 'success' : $status = 'danger';
@@ -49,6 +55,8 @@ class SubCategoryTable extends DataTableComponent
                 ->html(),
         ];
     }
+
+
 
     public function filters(): array
     {
@@ -70,10 +78,21 @@ class SubCategoryTable extends DataTableComponent
     }
 
 
-    public function query(): Builder
+
+    public function bulkActions(): array
     {
-        return SubCategory::query()
-            ->with('category');
+        return [
+            'export' => 'Export',
+            'refresh' => 'Refresh',
+        ];
+    }
+
+    public function export()
+    {
+        $industries = $this->getSelected();
+
+        // $this->clearSelected();
+        // return Excel::download(new IndustryExport($industries), 'industries.xlsx');
     }
 
     public function refresh(): void

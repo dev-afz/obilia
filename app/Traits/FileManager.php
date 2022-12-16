@@ -12,15 +12,9 @@ trait FileManager
 
     public  function uploadFile($file, string $path = "images", string $initials = "img"): string
     {
-        // try {
-        //     $destinationPath =  $path;
-        //     $req_file = $initials . '-' . rand(1, 1000) . sha1(time()) . "." . $file->getClientOriginalExtension();
-        //     $file = $file->move($destinationPath, $req_file);
-        //     return  str_replace('\\', '/', $file);
-        // } catch (Exception  $e) {
-        //     Log::info('Exception in image upload : ' . $e->getMessage());
-        //     throw new Exception("Failed to upload image. error : " . $e->getMessage());
-        // }
+        if (is_executable($file)) {
+            throw new Exception("File is executable");
+        }
         $file_path = Storage::disk('do')
             ->putFileAs('public/' . $path ?? 'images/', $file, $initials . '-' . rand(1, 1000) . sha1(time()) . "." . $file
                 ->getClientOriginalName());
@@ -30,6 +24,10 @@ trait FileManager
 
     public function storeFile($file, $path = null, $initials = "img")
     {
+        if (is_executable($file)) {
+            throw new Exception("File is executable");
+        }
+
         return Storage::disk('local')
             ->putFileAs('public/' . $path ?? 'images/', $file, $file
                 ->getClientOriginalName());
@@ -66,6 +64,24 @@ trait FileManager
         } catch (Exception $e) {
             Log::info('Exception in image delete : ' . $e->getMessage());
             throw new Exception("Failed to delete image. error : " . $e->getMessage());
+        }
+    }
+
+    public function uploadFileLocal($file, string $path = "images", string $initials = "img")
+    {
+
+        if (is_executable($file)) {
+            throw new Exception("File is executable");
+        }
+
+        try {
+            $destinationPath =  $path;
+            $req_file = $initials . '-' . rand(1, 1000) . sha1(time()) . "." . $file->getClientOriginalExtension();
+            $file = $file->move($destinationPath, $req_file);
+            return  str_replace('\\', '/', $file);
+        } catch (Exception  $e) {
+            Log::info('Exception in image upload : ' . $e->getMessage());
+            throw new Exception("Failed to upload image. error : " . $e->getMessage());
         }
     }
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Metadata\CategoryController;
 use App\Http\Controllers\Admin\Metadata\SubCategoryController;
 use App\Http\Controllers\Admin\GeneralController\PackageController;
 use App\Http\Controllers\Admin\Metadata\ExperienceLevelController;
+use App\Http\Controllers\Admin\Metadata\IndustryController;
 use App\Http\Controllers\Admin\Metadata\SkillController;
 
 /*
@@ -34,6 +35,13 @@ Route::middleware(['web', 'admin.auth'])->group(function () {
 
     Route::prefix('metadata')->name('metadata.')->group(function () {
 
+        Route::prefix('industries')
+            ->name('industries.')
+            ->controller(IndustryController::class)
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+            });
         Route::prefix('categories')
             ->name('categories.')
             ->controller(CategoryController::class)
