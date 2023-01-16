@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('workspaces', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->uuid('uuid');
-            $table->foreignId('job_id')->nullable()->constrained('jobs')->nullOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->foreignId('client_id')->nullable()->constrained('users')->nullOnDelete();
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('slug');
+            $table->foreignId('client_id')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('contract_id')->constrained('contracts');
+            $table->enum('status', ['active', 'archived'])->default('active');
             $table->timestamps();
         });
     }

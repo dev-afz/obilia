@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chats', function (Blueprint $table) {
+        Schema::create('contract_files', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->uuid('uuid')->unique();
-            $table->json('settings')->nullable();
-            $table->foreignId('job_id')->nullable()->constrained('jobs')->cascadeOnDelete();
-            $table->enum('status', ['active', 'closed', 'inactive'])->default('active')->after('job_id');
+            $table->text('file');
+            $table->foreignId('contract_id')->constrained('contracts');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chats');
+        Schema::dropIfExists('contract_files');
     }
 };
