@@ -19,7 +19,7 @@ return new class extends Migration
             $table->uuid('uuid')->unique();
             $table->json('settings')->nullable();
             $table->foreignId('job_id')->nullable()->constrained('jobs')->cascadeOnDelete();
-            $table->enum('status', ['active', 'closed', 'inactive'])->default('active')->after('job_id');
+            $table->enum('status', ['active', 'closed', 'inactive'])->default('active');
             $table->timestamps();
         });
     }
