@@ -13,15 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('user_businesses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('images', 3000)->nullable();
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->enum('role', ['service_provider', 'client'])->default('service_provider');
+            $table->string('cin');
+            $table->text('address');
+            $table->string('gstin')->nullable();
+            $table->text('incorporation_certificate');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('user_businesses');
     }
 };
