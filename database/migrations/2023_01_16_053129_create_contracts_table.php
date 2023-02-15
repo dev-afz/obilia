@@ -22,7 +22,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'active', 'completed', 'cancelled'])->default('pending');
             $table->foreignId('client_id')->constrained('users');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('job_id')->constrained('jobs');
+            $table->foreignId('job_id')->constrained('jobs')->nullable();
 
             $table->timestamps();
         });
