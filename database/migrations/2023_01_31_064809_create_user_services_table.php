@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_services', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title', 5000);
             $table->text('description');
             $table->float('price', 8, 2);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
