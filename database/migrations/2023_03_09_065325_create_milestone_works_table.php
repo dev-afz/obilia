@@ -15,11 +15,10 @@ return new class extends Migration
     {
         Schema::create('milestone_works', function (Blueprint $table) {
             $table->id();
+            $table->text('file')->nullable();
+            $table->text('remark')->nullable();
             $table->foreignId('milestone_id')->constrained('contract_milestones')->onDelete('cascade');
-            $table->text('file');
-            $table->text('remarks')->nullable();
-            $table->timestamp('approved_at')->nullable();
-            $table->timestamp('rejected_at')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }
