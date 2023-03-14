@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GeneralController\JobApplicationController;
+use App\Http\Controllers\Admin\GeneralController\JobController;
 use App\Http\Controllers\Admin\Metadata\CategoryController;
 use App\Http\Controllers\Admin\Metadata\SubCategoryController;
 use App\Http\Controllers\Admin\GeneralController\PackageController;
@@ -76,5 +78,11 @@ Route::middleware(['web', 'admin.auth'])->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/add', 'add')->name('add');
         Route::post('/store', 'store')->name('store');
+    });
+    Route::prefix('job')->name('job.')->controller(JobController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+    Route::prefix('jobapplication')->name('jobapplication.')->controller(JobApplicationController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 });
