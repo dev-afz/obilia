@@ -2,54 +2,56 @@
 
 namespace App\Http\Livewire\Tables;
 
-use App\Models\JobApplication;
-
-use Illuminate\Database\Eloquent\Builder;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use App\Models\Contract;
+use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 
-class JobApplicationTable extends DataTableComponent
+class ContractTable extends DataTableComponent
 {
-    protected $model = JobApplication::class;
+    protected $model = Contract::class;
 
     public function configure(): void
     {
         $this->setPrimaryKey('id');
-        $this->setPaginationStatus(true);
-        $this->setSearchDebounce(500);
     }
 
     public function builder(): Builder
     {
-        return $query = JobApplication::query()->with('job')->select();
+        return $query = Contract::query()->with(['user', 'client'])->select();
     }
+
     public function columns(): array
     {
         return [
             Column::make("Id", "id")
                 ->sortable(),
-            Column::make('Applicant', 'user.name')
+            Column::make("Title", "title")
                 ->sortable(),
-            Column::make('Posted By', 'job.client.id')
+            Column::make("Start Date", "start_date")
                 ->format(function ($value, $row, $column) {
-                    return $row->job->client->name;
+                    if (empty($value)) {
+                        return '<span class="badge badge-light-danger>NA</span>';
+                    }
+                    return '<span class="badge badge-light-success">' . date("M jS, Y h:i A", strtotime($value)) . '</span>';
+                })
+                ->html()
+                ->sortable(),
+            Column::make("Cost", "cost")
+                ->sortable(),
+            Column::make("Client", "client.name")
+                ->sortable(),
+            Column::make("Provider", "user.name")
+                ->format(function ($value, $row, $column) {
+                    return $row->user->name;
                 })
                 ->sortable(),
-            Column::make('Job', 'job.title')
-                ->sortable(),
-            Column::make('Price', 'bid_price')
-                ->sortable(),
-            Column::make('Document', 'document')
-                ->format(function ($value) {
-                    return view('content.table-component.avatar', ['image' => $value]);
-                })
-                ->sortable(),
-            Column::make('Work Letter', 'work_letter')
-                ->format(function ($value) {
+            Column::make('Description', 'description')
+                ->format(function ($value, $column, $row) {
                     $html = '<span hidden data-hidden class="d-none">' . $value . '</span>';
-                    return $html .= '<button data-work-letter class="btn btn-success btn-sm">View</button>';
+                    return $html .= '<button class="btn btn-success btn-sm" data-contract-description>View</button>';
                 })
                 ->html()
                 ->sortable(),
@@ -72,18 +74,19 @@ class JobApplicationTable extends DataTableComponent
     {
         return [
             DateFilter::make('Created At', 'created_at')
-                ->filter(function ($value, $query) {
-                    $query->whereDate('created_at', $value);
+                ->filter(function ($query, $value) {
+                    return $query->whereDate('created_at', $value);
                 }),
             SelectFilter::make('Status', 'status')
                 ->options([
-                    'accepted' => 'Accepted',
-                    'pending' => 'Pending',
-                    'rejected' => 'Rejected',
+                    'pending' => 'pending',
+                    'active' => 'Active',
+                    'completed' => 'Completed',
+                    'cancelled' => 'Cancelled'
                 ])
                 ->filter(function ($query, $value) {
                     $query->where('status', $value);
-                }),
+                })
         ];
     }
 
@@ -93,7 +96,6 @@ class JobApplicationTable extends DataTableComponent
             'refresh' => 'Refresh'
         ];
     }
-
     public function refresh()
     {
     }

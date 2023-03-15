@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GeneralController\ContractController;
 use App\Http\Controllers\Admin\GeneralController\JobApplicationController;
 use App\Http\Controllers\Admin\GeneralController\JobController;
 use App\Http\Controllers\Admin\Metadata\CategoryController;
@@ -84,5 +85,9 @@ Route::middleware(['web', 'admin.auth'])->group(function () {
     });
     Route::prefix('jobapplication')->name('jobapplication.')->controller(JobApplicationController::class)->group(function () {
         Route::get('/', 'index')->name('index');
+    });
+    Route::prefix('contract')->name('contract.')->controller(ContractController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('milestone', 'contractMilestone')->name('milestone');
     });
 });
