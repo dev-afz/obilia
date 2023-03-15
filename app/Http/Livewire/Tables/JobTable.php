@@ -76,9 +76,17 @@ class JobTable extends DataTableComponent
                 ->html()
                 ->sortable(),
             Column::make("Created at", "created_at")
-                ->sortable(),
+                ->format(function ($value, $column, $row) {
+                    return '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($value)) . '</span>';
+                })
+                ->sortable()
+                ->html(),
             Column::make("Updated at", "updated_at")
-                ->sortable(),
+                ->format(function ($value, $column, $row) {
+                    return '<span class="badge badge-light-primary">' . date("M jS, Y h:i A", strtotime($value)) . '</span>';
+                })
+                ->sortable()
+                ->html(),
         ];
     }
 
