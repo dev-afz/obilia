@@ -28,12 +28,9 @@ class PackageController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:255',
-            'duration' => 'required|integer|min:30',
-            'for' => 'required|string|in:individual,agency',
-            'payment_type' => 'required|string|in:onetime,subscription',
-            'price' => 'required|numeric|min:1',
+            'price' => 'required|numeric|min:0',
+            'price_yearly' => 'required|numeric|min:0',
             'discount' => 'nullable|numeric|min:0',
             'perks' => 'required|array',
             'perks.*.title' => 'required|string',

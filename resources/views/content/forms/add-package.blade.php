@@ -10,24 +10,19 @@
                     <x-form :reset="false" id="add-sub-category" :route="route('admin.packages.store')">
 
 
-                        <div class="col-md-6 col-12">
+                        {{-- <div class="col-md-6 col-12">
                             <x-select name="for" placeholder="Select who is this package for" :options="['individual', 'agency']" />
-                        </div>
-                        <div class="col-md-6 col-12">
-                            <x-select name="payment_type" placeholder="Select payment type" :options="['onetime', 'subscription']" />
-                        </div>
+                        </div> --}}
 
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-12 col-12">
                             <x-input name="name" />
                         </div>
-                        <div class="col-md-6 col-12">
-                            <x-input name="title" />
+
+                        <div class="col-md-4 col-12">
+                            <x-input name="price_yearly" label="Price (Yearly)" type="number" />
                         </div>
                         <div class="col-md-4 col-12">
-                            <x-input name="duration" label="Duration (in days)" type="number" />
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <x-input name="price" label="Price (per month)" type="number" />
+                            <x-input name="price" label="Price (Monthly)" type="number" />
                         </div>
                         <div class="col-md-4 col-12">
                             <x-input value="0" name="discount" label="Discount (in percent)" type="number" />
@@ -41,11 +36,12 @@
                                 'name' => 'title',
                                 'type' => 'select',
                                 'options' => [
-                                    'commition' => 'Commition',
-                                    'credits' => 'Credits',
-                                    'connections' => 'Connections',
+                                    'commission' => 'Commission',
+                                    'connection' => 'Connection',
+                                    'active_workspace' => 'Active Workspace',
+                                    'storage' => 'Storage (in GB)',
                                     'job_applications' => 'Job Applications',
-                                    'watermark' => 'Watermark',
+                                    'service' => 'List service upto',
                                 ],
                                 'col' => 6,
                             ],

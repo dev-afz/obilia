@@ -17,19 +17,29 @@ class PackageAction
 
         try {
 
-            $package = Package::create([
+            $package_monthly = Package::create([
                 'name' => $request->name,
                 'title' => $request->title,
                 'description' => $request->description,
-                'duration' => $request->duration,
-                'for' => $request->for,
-                'is_subscription' => $request->payment_type == 'subscription' ? 'yes' : 'no',
+                'duration' => 28,
                 'price' => $request->price,
+                'discount' => $request->discount,
+            ]);
+            $package_yearly = Package::create([
+                'name' => $request->name,
+                'title' => $request->title,
+                'description' => $request->description,
+                'duration' => 365,
+                'price' => $request->price_yearly,
                 'discount' => $request->discount,
             ]);
 
             foreach ($request->perks as $key => $perk) {
-                $package->perks()->create([
+                $package_monthly->perks()->create([
+                    'name' => $perk['title'],
+                    'value' => $perk['value'],
+                ]);
+                $package_yearly->perks()->create([
                     'name' => $perk['title'],
                     'value' => $perk['value'],
                 ]);
