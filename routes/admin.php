@@ -44,6 +44,7 @@ Route::middleware(['web', 'admin.auth'])->group(function () {
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
+                Route::post('update', 'update')->name('update');
             });
         Route::prefix('categories')
             ->name('categories.')

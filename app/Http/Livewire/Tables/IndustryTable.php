@@ -3,10 +3,11 @@
 namespace App\Http\Livewire\Tables;
 
 use App\Models\Industry;
+use Illuminate\Http\Request;
 use App\Exports\IndustryExport;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Query\Builder;
-use Illuminate\Support\Facades\Log;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\DateFilter;
@@ -17,11 +18,18 @@ class IndustryTable extends DataTableComponent
 {
     protected $model = Industry::class;
 
+    protected $edit_data = null;
+
+    protected $name = "test", $image, $status;
+
     public function configure(): void
     {
         $this->setPrimaryKey('id');
         $this->setPaginationStatus(true);
         $this->setSearchDebounce(500);
+        $this->setConfigurableAreas([
+            'after-pagination' => 'content.tables.edit.edit-industry',
+        ]);
     }
 
     public function columns(): array
@@ -44,6 +52,12 @@ class IndustryTable extends DataTableComponent
                     return '<span class="badge text-capitalize badge-light-' . $status . '">' . $value . '</span>';
                 })
                 ->sortable()
+                ->html(),
+
+            Column::make("Actions", "id")
+                ->label(function ($value, $column) {
+                    return '<button class="btn btn-primary btn-sm" wire:click="edit(' . $value->id . ')">Edit</button>';
+                })
                 ->html(),
 
 
@@ -97,5 +111,28 @@ class IndustryTable extends DataTableComponent
 
     public function refresh(): void
     {
+    }
+
+
+    public function edit($id)
+    {
+        $this->edit_data = Industry::find($id);
+
+        $this->name = $this->edit_data->name;
+        $this->image = $this->edit_data->image;
+
+        \Log::info($this->name);
+
+        $this->dispatchBrowserEvent('showCanvas', 'edit_industry');
+    }
+
+
+    public function update(Request $request)
+    {
+        //get submited data
+
+        $data = $request->only(['name', 'image']);
+
+        \Log::info($data);
     }
 }

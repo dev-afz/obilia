@@ -35,4 +35,32 @@ class IndustryController extends Controller
             'refresh_table' => true,
         ]);
     }
+
+
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:industries,name,' . $request->id,
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:512',
+            'id' => 'required|int',
+        ]);
+
+        $industry = Industry::findOrFail($request->id);
+
+        $industry->name = $request->name;
+
+        if ($request->hasFile('image')) {
+            // $this->deleteFile($industry->image);
+            $industry->image = $this->uploadFile($request->file('image'), 'images/industries', 'industry');
+        }
+
+        $industry->save();
+
+        return response()->json([
+            'message' => 'Industry updated successfully',
+            'status' => 'success',
+            'refresh_table' => true,
+        ]);
+    }
 }
