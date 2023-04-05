@@ -13,61 +13,63 @@
 </div>
 
 
-@push('component-html')
-    <div class="file-uploader-preview" id="{{ $id ?? $name }}-file-uploader-preview">
-    </div>
-@endpush
-@push('component-script')
-    <script>
-        let {{ $id ?? $name }}_attached = false;
+@if ($preview)
+    @push('component-html')
+        <div class="file-uploader-preview" id="{{ $id ?? $name }}-file-uploader-preview">
+        </div>
+    @endpush
+    @push('component-script')
+        <script>
+            let {{ $id ?? $name }}_attached = false;
 
-        let {{ $id ?? $name }}_imageContainer = document.querySelector("#{{ $id ?? $name }}-file-uploader-preview");
+            let {{ $id ?? $name }}_imageContainer = document.querySelector("#{{ $id ?? $name }}-file-uploader-preview");
 
-        const {{ $id ?? $name }}_followMouse = (event) => {
-            {{ $id ?? $name }}_imageContainer.style.left = event.x + "px";
-            {{ $id ?? $name }}_imageContainer.style.top = event.y + "px";
-        }
-
-
-        $(document).on('pointerenter', '#{{ $id ?? $name }}', function() {
-            if (!{{ $id ?? $name }}_attached) {
-                {{ $id ?? $name }}_attached = true;
-                const files = this.files[0];
-
-                if (files) {
-                    const fileReader = new FileReader();
-                    fileReader.readAsDataURL(files);
-                    fileReader.addEventListener("load", function() {
-                        {{ $id ?? $name }}_imageContainer.style.backgroundImage = "url(" + this.result +
-                            ")";
-                        {{ $id ?? $name }}_imageContainer.style.display = "block";
-                    });
-                }
-
-                document.addEventListener("pointermove", {{ $id ?? $name }}_followMouse);
+            const {{ $id ?? $name }}_followMouse = (event) => {
+                {{ $id ?? $name }}_imageContainer.style.left = event.x + "px";
+                {{ $id ?? $name }}_imageContainer.style.top = event.y + "px";
             }
-        });
-        $(document).on('pointerleave', '#{{ $id ?? $name }}', function() {
-            {{ $id ?? $name }}_attached = false;
-            {{ $id ?? $name }}_imageContainer.style.display = "";
-            document.removeEventListener("pointermove", {{ $id ?? $name }}_followMouse);
-        });
-    </script>
-@endpush
 
 
-@pushonce('component-style')
-    <style>
-        .file-uploader-preview {
-            position: absolute;
-            z-index: 99999;
-            background-size: cover;
-            border-radius: 5px;
-            display: none;
-            width: 200px;
-            height: 200px;
-            background-color: red;
-            pointer-events: none;
-        }
-    </style>
-@endpushonce
+            $(document).on('pointerenter', '#{{ $id ?? $name }}', function() {
+                if (!{{ $id ?? $name }}_attached) {
+                    {{ $id ?? $name }}_attached = true;
+                    const files = this.files[0];
+
+                    if (files) {
+                        const fileReader = new FileReader();
+                        fileReader.readAsDataURL(files);
+                        fileReader.addEventListener("load", function() {
+                            {{ $id ?? $name }}_imageContainer.style.backgroundImage = "url(" + this.result +
+                                ")";
+                            {{ $id ?? $name }}_imageContainer.style.display = "block";
+                        });
+                    }
+
+                    document.addEventListener("pointermove", {{ $id ?? $name }}_followMouse);
+                }
+            });
+            $(document).on('pointerleave', '#{{ $id ?? $name }}', function() {
+                {{ $id ?? $name }}_attached = false;
+                {{ $id ?? $name }}_imageContainer.style.display = "";
+                document.removeEventListener("pointermove", {{ $id ?? $name }}_followMouse);
+            });
+        </script>
+    @endpush
+
+
+    @pushonce('component-style')
+        <style>
+            .file-uploader-preview {
+                position: absolute;
+                z-index: 99999;
+                background-size: cover;
+                border-radius: 5px;
+                display: none;
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                pointer-events: none;
+            }
+        </style>
+    @endpushonce
+@endif

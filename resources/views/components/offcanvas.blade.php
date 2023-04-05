@@ -12,6 +12,6 @@
 
 @pushonce('component-script')
     <script>
-        const offc_{{ $id }} = new bootstrap.Offcanvas(document.getElementById("{{ $id }}"));
+        // const offc_{{ $id }} = new bootstrap.Offcanvas(document.getElementById("{{ $id }}"));
     </script>
 @endpushonce

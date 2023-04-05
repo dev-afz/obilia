@@ -14,6 +14,7 @@ class InputFile extends Component
     public $parentClass;
     public $id;
     public $required;
+    public $preview;
     public function __construct(
         $name,
         $class = "",
@@ -22,7 +23,8 @@ class InputFile extends Component
         $attrs = "",
         $parentClass = "",
         $id = null,
-        $required = true
+        $required = true,
+        $preview = false,
     ) {
         $this->class = $class;
         $this->name = $name;
@@ -32,6 +34,7 @@ class InputFile extends Component
         $this->parentClass = $parentClass;
         $this->id = $id;
         $this->required = $required;
+        $this->preview = $preview;
     }
 
 

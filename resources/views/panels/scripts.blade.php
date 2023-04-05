@@ -29,6 +29,7 @@
 
 <script>
     window.addEventListener('showCanvas', event => {
+        console.log(event.detail);
         $(`#${event.detail}`).offcanvas('show')
     });
 </script>
