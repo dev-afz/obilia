@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::table('razorpay_orders', function (Blueprint $table) {
-            $table->float('igst')
+            $table->float('sgst')
                 ->after('amount')
                 ->default(0);
             $table->float('cgst')
-                ->after('igst')
+                ->after('sgst')
                 ->default(0);
             $table->json('discount_details')->nullable()->after('discount');
         });
