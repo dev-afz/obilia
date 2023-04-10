@@ -3,12 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\GeneralController\ContactDataController;
 use App\Http\Controllers\Admin\GeneralController\ContractController;
 use App\Http\Controllers\Admin\GeneralController\JobApplicationController;
 use App\Http\Controllers\Admin\GeneralController\JobController;
 use App\Http\Controllers\Admin\Metadata\CategoryController;
 use App\Http\Controllers\Admin\Metadata\SubCategoryController;
 use App\Http\Controllers\Admin\GeneralController\PackageController;
+use App\Http\Controllers\Admin\GeneralController\WishlistController;
 use App\Http\Controllers\Admin\Metadata\ExperienceLevelController;
 use App\Http\Controllers\Admin\Metadata\IndustryController;
 use App\Http\Controllers\Admin\Metadata\SkillController;
@@ -90,5 +92,11 @@ Route::middleware(['web', 'admin.auth'])->group(function () {
     Route::prefix('contract')->name('contract.')->controller(ContractController::class)->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('milestone', 'contractMilestone')->name('milestone');
+    });
+    Route::prefix('contactrequest')->name('contactrequest.')->controller(ContactDataController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+    Route::prefix('wishlist')->name('wishlist.')->controller(WishlistController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 });
